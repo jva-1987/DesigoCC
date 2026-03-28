@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="13753918347" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Substitutions in a D3 Visualization Dashboard" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="13754185099" /><meta name="next" content="13753896459" /><script>var fileExtension = "html";</script><title>Substitutions in a D3 Visualization Dashboard</title></head><body class="schema-index content-container container" id="13753918347" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="13753918347" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657896459">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29658107915">Other Applications</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="13753711115">D3 Visualization</a></li><li class="breadcrumb-item active">Substitutions in a D3 Visualization Dashboard</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-13753918347"><h1 id="heading-13753918347">Substitutions in a D3 Visualization Dashboard</h1><div class="metalist"></div><p>A dashboard receives its instructions of what and where to display controls etc., from the JSON configuration file. The file consists of a series of properties and their values that provide the information. Depending on the complexity of the dashboard, the property-value lists can become lengthy. To minimize the length of a JSON configuration file, to apply a common style to several widgets, or avoid duplicating repetitive data, for example, substitutions for the property-value pairs can be created, and the parameters for the substitutions passed to the configuration file via the URL.</p><p>A substitution is defined by creating a parameter <strong>key</strong> and assigning a value to it, which can be a string, number, Boolean, or a JSON object. The parameter key can then be set for any property in the configuration file.</p><div class="textmodule" id="14105862923">
+
+<h2>Substitution Syntax</h2>
+
+<p>The syntax for creating a substitution in the configuration file is: <strong>$</strong><code>[ParameterKey</code>]<strong>$</strong>.</p>
+<p><strong>Example:</strong> </p>
+<ul class="list"><li value="1">No substitution: “rows”:6,</li><li value="2">Substitution: "rows": “$rowsKey$”</li><li value="3">Copied and entered in the URL: Rows = 6</li></ul>
+
+<p>Once the key-values are manually created for a configuration file, they are stored in the URL. During runtime, the dashboard reads the JSON configuration file, makes a list of all the keys it needs to resolve. Once the parameter key is found in the URL and its value is resolved, the property value is replaced in the JSON file at all the places where the key is used. If the specified JSON configuration file is not found in the dashboards folder, then the values from the <strong>defaultconfig.json</strong> file is used as the default.</p>
+<p>You can use a text editor to create and store your parameter key-value substitutions. You can then copy and paste the pairs into the URL.</p></div><div class="textmodule" id="14105864459">
+
+<h2>Substitution Rules and Defaults</h2>
+
+<ul class="list"><li value="1">A parameter key may not contain another parameter key within a parameter key.</li><li value="2">If no value is found for a parameter key in the URL, the following defaults are calculated:</li><ul class="list"><li value="1">Rows and Columns are based on the number of widgets in the Widgets section the rows or columns will get calculated and assigned</li><li value="2">Margins: default value is “5”</li><li value="3">Logger: If the dashboard application is running in a browser, the default value is “<em>Browser logger</em>” and is created by default.</li><li value="4">Widgets and baseURI are mandatory fields from configuration file. Default values are not assigned for these properties. If no parameter values are found for these properties, the dashboard will not load properly.</li></ul></ul>
+
+</div><div class="textmodule" id="14105834891"><h2>JSON Object Example</h2><p>A JSON object is a group of properties in curly brackets. In the example below, a JSON object is substituted.</p><p><em>Example</em></p><p>Under the DashboardLayout section, <strong>LoggingConfig</strong> is configured as follows:</p><table class="table tabletype-framed table-fixed" aria-label="" data-legend-id="ID0E2465B"><colgroup><col style="width: 100.0%;"></col></colgroup><tbody><tr><td><p class="text-left">"DashboardLayout":{</p><p class="text-left">"Rows": 6,</p><p class="text-left">"Columns": 3,</p></td></tr><tr><td><p class="text-left"><strong>"LoggingConfig":</strong></p><p class="text-left"><strong>{</strong></p><p class="text-left"><strong>"LoggerName": "AFWLogger",</strong></p><p class="text-left"><strong>"TurnOnInfoTrace": true,</strong></p><p class="text-left"><strong>"TurnOnErrorTrace": true,</strong></p><p class="text-left"><strong>"TurnOnWarningTrace": true</strong></p><p class="text-left"><strong>},</strong></p></td></tr><tr><td><p class="text-left">"Margins":</p></td></tr></tbody></table><p> </p><p>In the following section, the LoggingConfig section has been substituted, as follows:</p><table class="table tabletype-framed table-fixed" aria-label="" data-legend-id="ID0E2465B"><colgroup><col style="width: 100.0%;"></col></colgroup><tbody><tr><td><p class="text-left">"DashboardLayout":{</p><p class="text-left">"Rows": 6,</p><p class="text-left">"Columns": 3,</p></td></tr><tr><td><p class="text-left"><strong>""LoggingConfig":“$LoggerObjectKey$”</strong></p></td></tr><tr><td><p class="text-left">"Margins":</p></td></tr></tbody></table><p> </p><p>In the URL the parameter value for the key, $LoggerObjectKeys$, is set as follows:</p><table class="table tabletype-noframe table-fixed" aria-label="" data-legend-id="ID0E2465B"><colgroup><col style="width: 100.0%;"></col></colgroup><tbody><tr><td><p class="text-left">LoggerObjectKey = {</p><p class="text-left">"LoggerName": "AFWLogger",</p><p class="text-left">"TurnOnInfoTrace": true,</p><p class="text-left">"TurnOnErrorTrace": true,</p><p class="text-left">"TurnOnWarningTrace": true</p><p class="text-left">}</p></td></tr></tbody></table><div class="linklist"></div></div><div class="textmodule" id="14105836427">
+
+<h2>Entire JSON Substitution</h2>
+
+<p>A JSON configuration file can be used as a value substitution. In this case, the configuration file is provided as a URL parameter, the JSON extension is dropped.</p>
+<p>Normally, a dashboard receives its visual instructions from the JSON configuration file, which can also be specified in the URL, as follows:</p>
+<p><code>http://AAEINPU746563W.xyz.Delta.net/EnergyBldg1Floor2DashboardApp1/#/dashboard?</code><strong>configfile=dashboardconfig.json</strong><code>&amp;pName=GMS_AP2_Enhanced_LAO_1</code></p>
+<p>To use the JSON configuration file as a value substitution, </p>
+<ul class="list"><li value="1">Drop the JSON extension from the file name</li><li value="2">Substitute „pName“ with another parameter name.</li></ul>
+</div><div class="textmodule" id="14105837963">
+
+<h2>Boolean, String, and Integer Example</h2>
+
+<p>"DashboardLayout":{</p>
+<p>"Rows": 2,</p>
+<p>"Columns": 2,</p>
+<p>"Logging":</p>
+<p>{</p>
+<p>"LoggerName": "$stringValue$",</p>
+<p>"TurnOnInfoTrace": "$boolValue_True$",</p>
+<p>"TurnOnErrorTrace": "$boolValue_True$",</p>
+<p>"TurnOnWarningTrace": "$boolValue_False$"</p>
+<p>},</p>
+<p>"Margins":</p>
+<p>{</p>
+<p>"Top": "$NumericValue$",</p>
+<p>"Right":"$NumericValue$",</p>
+<p>"Bottom":"$NumericValue$",</p>
+<p>"Left":"$NumericValue$"</p>
+<p>}</p>
+<p>}</p>
+<p><strong>NOTES:</strong></p>
+<p>Where value replicable parameters in URL can be as follows</p>
+<p>$stringValue$ = "AWFLogger"</p>
+<p>$boolValue_True$ = true</p>
+<p>$boolValue_False$ = false</p>
+<p>$NumericValue$ = 2</p></div><div class="textmodule" id="14105839499">
+
+<h2>Array Example</h2>
+
+<p>{</p>
+<p>"DashboardLayout":{</p>
+<p>"Rows": 2,</p>
+<p>"Columns": 2,</p>
+<p>"Logging":</p>
+<p>{</p>
+<p>"LoggerName": "AFWLogger",</p>
+<p>"TurnOnInfoTrace": true,</p>
+<p>"TurnOnErrorTrace": true,</p>
+<p>"TurnOnWarningTrace": true</p>
+<p>},</p>
+<p>"Margins":</p>
+<p>{</p>
+<p>"Top": 2,</p>
+<p>"Right":2,</p>
+<p>"Bottom":2,</p>
+<p>"Left":2</p>
+<p>}</p>
+<p>},</p>
+<p>"widgets": “$widgetsCollection$",</p>
+<p>"baseURI":"http://localhost:8080" </p>
+<p>}</p>
+<p>==========================================================</p>
+<p>The value of $widgetsCollection$ in URL is expected as follows</p>
+<p>Widgets</p>
+<p>Collection = "[</p>
+<p>{</p>
+<p>"Name":"My Chart 1",</p>
+<p>"ChartType":"PieChart",</p>
+<p>"layout": {</p>
+<p>"startRow": 1,</p>
+<p>"startColumn":1,</p>
+<p>"rowspan":1,</p>
+<p>"columnSpan":1 </p>
+<p>},</p>
+<p>"dataProvider":{</p>
+<p>"name":"<em>ProviderName</em>r",</p>
+<p>"privateConfig":</p>
+<p>{</p>
+<p>"counterType" : "UnprocessedCount"</p>
+<p>}</p>
+<p>},</p>
+<p>"style":{</p>
+<p> </p>
+<p>}</p>
+<p>},</p>
+<p>{</p>
+<p>"Name":"My Chart 1",</p>
+<p>"ChartType":"PieChart",</p>
+<p>"layout": {</p>
+<p>"startRow": 1,</p>
+<p>"startColumn":2,</p>
+<p>"rowspan":1,</p></div></article><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="14814345355" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Command Control Elements and Symbols" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="14154625035" /><meta name="next" content="14154689803" /><script>var fileExtension = "html";</script><title>Command Control Elements and Symbols</title></head><body class="schema-index content-container container" id="14814345355" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="14814345355" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657896459">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29658028427">Graphics</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="14103699467">Graphics Editor</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="14014977803">Overview of Graphics</a></li><li class="breadcrumb-item active">Command Control Elements and Symbols</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-14814345355"><h1 id="heading-14814345355">Command Control Elements and Symbols</h1><p>There are seven command controls that enable you to send a command from a graphic on the canvas. However, any element can also be configured to send a command. A command element or symbol allows you to send commands from within a graphic.</p><div class="textmodule" id="14820780043">
+
+<h2>Command Control Symbols</h2>
+
+<p>A command element or symbol allows you to send commands from within a graphic. The commands are initiated by either clicking on the command control element or symbol in response to parameter values entered into the element or the symbol on the graphic. The symbol represents a command on the graphic. Instead of configuring commands for each data point on a graphic, a symbol can be created that represents a command. This symbol is dropped when dragging a data point from the System Browser onto a graphic. The symbol is marked as Command Control when it is associated with a Model or Function.</p></div><div class="textmodule" id="17745669771">
+
+<h2>Creating a Command Symbol</h2>
+
+<p>A librarian creates a command symbol by configuring command control elements.</p>
+<p>In the <strong>Models and Functions</strong> tab, the librarian indicates which symbol functions as the command symbol. Each style associated with a symbol, can have two default symbols: a regular symbol and a command symbol.</p></div><div class="textmodule" id="14814348299">
+
+<h2>Dropdown Command</h2>
+
+<p>The Dropdown<strong> </strong>command control allows you to change a enumeration value, such as the Units property or a Binary Value. You create the Dropdown<strong> </strong>command control in the Graphics Editor.</p>
+<p> </p></div><div class="textmodule" id="14814349835">
+
+<h2>Numeric Command</h2>
+
+<p>The <strong>Numeric</strong> command control allows you to change an analog value. You create the <strong>Numeric</strong> command control in the Graphics Editor.</p>
+<p> </p></div><div class="textmodule" id="14814351371">
+
+<h2>Password Command</h2>
+
+<p>The <strong>Password</strong> command control allows you to command properties that require <strong>Password </strong>parameters, such as <strong>Cool Start</strong> and <strong>Disabling a Panel</strong>. You create the <strong>Password</strong> command control in the Graphics Editor.</p>
+<p> </p></div><div class="textmodule" id="14814352907">
+
+<h2>Rotator Command</h2>
+
+<p>The <strong>Rotator</strong> command control allows you to view and change an analog value in a rotational motion. The <strong>Rotator </strong>command control does not have a visual component; the frame; therefore, tick marks, and the Rotator thumb must be drawn separately.</p>
+<p><strong>Rotator Example</strong></p>
+<p>The illustration below is a visual example of a <strong>Rotator</strong> command control. The tick marks, the Rotator thumb, the text and the rectangle are all created separately.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/jpg/11479069579__Web.jpg" width="553" height="372" /></figure>
+<h2>Thumb Calculations</h2>
+
+<p>The pivot point of the Rotator thumb is determined by its <strong>Angle Center X</strong> and <strong>Angle Center Y</strong> property values.</p>
+<p><strong>Rotator Properties: Calculating Minimum, Maximum, Start and Rotation Angle</strong></p>
+<p>The following drawing shows how the <strong>Minimum </strong>and the <strong>Maximum</strong> property values of the <strong>Rotator </strong>command are placed in conjunction with the <strong>Start Angle </strong>and <strong>Rotational Angle</strong> for a total of less than 360 degrees, that is, less than one rotation.</p>
+<p> </p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/11215714059__en__Web.png" width="351" height="339" /></figure>
+<p>In the illustration below, the Rotation Angle is set greater than 360 degrees and the thumb can make multiple rotations.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/11215717643__en__Web.png" width="396" height="339" /></figure>
+<p> </p><div class="image"></div><div class="image"></div><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="14814353931">
+
+<h2>Slider Command</h2>
+
+<p>The <strong>Slider</strong> command control allows you to view and change an analog value in a linear, sliding motion. The <strong>Slider</strong> command control only has a background visual component; therefore, once configured, the frame and the tick marks must be drawn separately.</p>
+<h2>Slider Example </h2>
+
+<p>The illustration below is an example of a <strong>Slider</strong> command and displays the <strong>Minimum</strong> and <strong>Maximum </strong>properties and how the thumb lines up with the slider in regards to the width of the thumb.</p>
+<p>The thumb and the tick marks are not a part of the <strong>Slider </strong>command, and are drawn separately.</p>
+<p><img style="vertical-align: baseline;" src="../Images/png/11215710475__en__Web.png" /></p>
+<p> </p><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="14820833035">
+
+<h2>Spin Button Command</h2>
+
+<p>The <strong>Spin Button</strong> command control allows you to view and change an analog value with two buttons, for example “up” and “down” that increase or decrease the value by a set increment. The <strong>Spin Button</strong> command control does not have a visual component; therefore, the <strong>Up</strong> and <strong>Down</strong> thumbs must be drawn separately.</p>
+<p>A <strong>Spin Button</strong> command control is created by using two path<strong> </strong>elements; one is grouped with <strong>+</strong> text element, and the other with the<strong> -</strong> text element.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/jpg/11513407371__Web.jpg" width="107" height="135" /></figure>
+<p>The element tree below illustrates how the above Spin Button command control looks in the Element Tree.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/jpg/11513403915__Web.jpg" width="303" height="439" /></figure>
+<p> </p><div class="image"></div><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="14814355979">
+
+<h2>String Command</h2>
+
+<p>The <strong>String</strong> command control allows you to view and change the value of data points with string value data types. The <strong>Description</strong> property of a data point is a good example for using a <strong>String</strong> command control.</p>
+<p> </p></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div></article><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>

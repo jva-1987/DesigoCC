@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="14154745227" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Graphic Components and Types" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="14154721547" /><meta name="next" content="14154754955" /><script>var fileExtension = "html";</script><title>Graphic Components and Types</title></head><body class="schema-index content-container container" id="14154745227" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="14154745227" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657896459">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29658028427">Graphics</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="14103699467">Graphics Editor</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="14014977803">Overview of Graphics</a></li><li class="breadcrumb-item active">Graphic Components and Types</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-14154745227"><h1 id="heading-14154745227">Graphic Components and Types</h1><p>A graphic is a visual representation of a piece of equipment, floors, buildings, a plant, or an entire campus engineered for a specific project. The graphic is a .CCG file that contains drawing elements and images and is saved to a project’s <strong>Graphics</strong> folder.</p><div class="textmodule" id="14155598987">
+
+<h2>Viewport</h2>
+
+<p>A graphic viewport is a defined rectangular sub-section of a graphic that can be viewed independently of the main graphic; it is a zoomed-in view of a larger graphic that allows you to see specific detail related to the graphics depth. Viewports are stored as children of their parent graphic and displayed in the<strong> Graphics</strong> folder.</p>
+<p>There are two types of graphic viewports: automatic and manual.</p>
+<p>Automatic viewports are automatically generated when a graphic contains one or more data point objects. The data point object is automatically linked and mapped to that view of the graphic and stored in the <strong>Related Items</strong> tab. During runtime, if the object is selected from System Browser, the part of the graphic that hosts that object, its viewport, displays in the Graphics Viewer.</p>
+<p>Manual viewports are created by a user. Manual viewports are drawn on a graphic in the Graphics Editor, and then data point objects from System Browser are associated with them.</p>
+<p> </p></div><div class="textmodule" id="14155600523">
+
+<h2>Symbol</h2>
+
+<p>A reusable XAML file that represents a piece of equipment, floor, or any component or entity. They are saved as .CCS files and stored in a library and are typically used to display system object values. A symbol does not have a data point type associated with it.</p>
+<p> </p></div><div class="textmodule" id="14155602059">
+
+<h2>Graphic Template</h2>
+
+<p>The <span class="variable">Desigo CC</span> software package provides you with standard BACnet device graphics for various applications. The graphic contains placeholders to data points using expression references, for example RoomControllerRef. Graphic Templates are saved as .CCT files and display the runtime values of mapped system objects. A template graphic does not have an associated data point type reference.</p>
+<p>Graphic templates only use star substitutions but no named substitutions.</p>
+<p> </p><div class="linklist"></div></div><div class="textmodule" id="14155603083">
+
+<h2>Sample Graphic</h2>
+
+<p>A sample graphic is a graphic page that does not have a corresponding data point, since it is not stored in the project’s <strong>Graphics</strong> folder. Sample graphics are located in a library's <strong>Sample Graphics</strong> folder and are opened as Read-Only. If you however, open the sample graphic from another location, the graphic is not read-only, and you can edit the graphic.</p>
+<p>Graphics are computer-generated raster or vector images consisting of a combination of drawing elements such as dots, lines, text, and buttons used to represent equipment, a facility, or a campus in a management platform. A graphic has the following additional attributes:</p>
+<ul class="list"><li value="1">A graphic is created is created and edited in the Graphics Editor application.</li><li value="2">A graphic has a name and is saved as a .CCG file.</li></ul>
+
+<p> </p></div><div class="textmodule" id="14155604619">
+
+<h2>Raster Image</h2>
+
+<ul class="list"><li value="1">A raster image is a computer image that is stored and displayed as a series of dots in a rectangular grid. The following applies to raster images in the Graphics Editor.</li><li value="2">The following raster images are supported: BMP, JPG, GIF, TIF, TIFF, and PNG.</li><li value="3">They are stored as a stream inside a graphic page (XAML).</li><li value="4">They can be stretched and clipped.</li></ul><section class="safety safety-type-info safety-severity-info" aria-label="    Information"><div class="safety-body row"><div class="safety-symbol" aria-label="aria.safetySymbol"><img src="../safety/info_Info.gif" alt="info" /></div><div class="safety-content" aria-label="description"><p class="safety-consequence" aria-label="Consequences"><strong>NOTE 1: </strong><br />Images larger than ten million pixels will not display in the Web Client due to memory consumption restrictions. If you have an image this large and want to view it in the Web Client, use an image resizing tool to reduce the size of the image. <br /><strong>NOTE 2:<br /></strong>The performance of a graphic may be severely impacted if it contains one or more raster images with active values in the Rotation Speed property of the Layout group property. Raster images supported by the Graphics Editor include: BMP, JPG, GIF, TIF, TIFF, and PNG<strong>.</strong></p></div></div></section>
+
+<p> </p></div><div class="textmodule" id="14155606155">
+
+<h2>Vector</h2>
+
+<p>A computer image, stored and displayed as geometrical primitives such as points, lines, curves, and other shapes, and based on mathematical equations to represent a graphic. Vector images can be proportionally scaled.</p>
+<p> </p></div><div class="textmodule" id="14155620491">
+
+<h2>XAML</h2>
+
+<p>eXtensible Application Markup Language. A user interface markup language based on the eXtensible Markup Language (XML) and used to define user interface elements. XAML supports features such as 3D and controls.</p>
+<p> </p></div><div class="textmodule" id="14155622027">
+
+<h2>XPS</h2>
+
+<p>XML Paper Specification. A XAML-based specification for a page description language and a fixed-document format that supports device and resolution independence and vector-graphic elements in documents.</p>
+<p> </p></div><div class="textmodule" id="14155623563">
+
+<h2>AutoCAD</h2>
+
+<p>You can view, import, and modify any valid 2D AutoCAD file created with the Autodesk software. This is accomplished in the AutoCAD importer tool installed with the <span class="variable">Desigo CC</span> software.</p>
+<p> </p><div class="linklist"></div></div><div class="textmodule" id="14155624587">
+
+<h2>Scaling</h2>
+
+<p>The Graphics Editor allows you to set the overall scale of a graphic and any graphical objects deposited on it. Scaling allows you to maintain a consistent size ratio of all elements on a graphic. Setting the scaling is done by associating a pixel unit with a logical unit of measurement. For example, one pixel can be set to equal 302 kilometers or miles. Logical measurements are set in the <strong>Graphics</strong> properties in the <strong>Properties </strong>view.</p>
+<p> </p></div><div class="textmodule" id="14155626123"><h2>Graphic Property Interdependencies</h2><p>There are five graphic properties that allow you to specify the height and width of a graphic, unit type, and logical scale, width and height.</p><p>The table shows the interdependency of graphic properties when they are modified. An “x” means that if there is a change in one property value, the associated property value also changes.</p><table class="table tabletype-header table-fixed" aria-label="" data-legend-id="ID0EATRXB"><colgroup><col style="width: 12.1%;"></col><col style="width: 13.9%;"></col><col style="width: 12.3%;"></col><col style="width: 18.4%;"></col><col style="width: 20.5%;"></col><col style="width: 22.5%;"></col></colgroup><thead><tr><th><p class="text-center"> </p></th><th><p class="text-left"> </p></th><th><p class="text-left"> </p></th><th><p class="text-left"> </p></th><th><p class="text-left"> </p></th><th><p class="text-left"> </p></th></tr></thead><tbody><tr><td><p class="text-center"> </p></td><td><p class="text-left">Height</p></td><td><p class="text-left">Width</p></td><td><p class="text-left">Logical Scale Factor</p></td><td><p class="text-left">Logical Width</p></td><td><p class="text-left">Logical Height</p></td></tr><tr><td><p class="text-center">Height</p></td><td><p class="text-center">x</p></td><td><p class="text-center"> </p></td><td><p class="text-center"> </p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td></tr><tr><td><p class="text-center">Width</p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td><td><p class="text-center"> </p></td></tr><tr><td><p class="text-center">Logical Scale Factor</p></td><td><p class="text-center"> </p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td></tr><tr><td><p class="text-center">Logical Width</p></td><td><p class="text-center"> </p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td></tr><tr><td><p class="text-center">Logical Height</p></td><td><p class="text-center"> </p></td><td><p class="text-center"> </p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td><td><p class="text-center">x</p></td></tr></tbody></table><p><br /></p><div class="linklist"></div></div><div class="textmodule" id="14155627659">
+
+<h2>Bitmap Images</h2>
+
+<p>Raster images, also known as bitmap files, can be viewed and modified on the graphic canvas. There are a number of rules related to working with raster images in the Graphics Editor.</p><section class="safety safety-type-info safety-severity-info" aria-label="    Information"><div class="safety-body row"><div class="safety-symbol" aria-label="aria.safetySymbol"><img src="../safety/info_Info.gif" alt="info" /></div><div class="safety-content" aria-label="description"><p class="safety-consequence" aria-label="Consequences"><strong>NOTE:<br /></strong>The performance of a graphic may be severely impacted if it contains one or more raster images with active values in the Rotation Speed property of the Layout group property. Raster images supported by the Graphics Editor include: BMP, JPG, GIF, TIF, TIFF, and PNG<strong>.</strong></p></div></div></section>
+<h2>Copying Bitmap Images from the Canvas</h2>
+
+<p>When you copy a bitmap image element from the canvas using the <strong>CTRL+C</strong> keys or selecting <strong>Copy</strong> from the menu available on right-click, the following rules apply to bitmap images:</p>
+<ul class="list"><li value="1">The clipboard always contains the XAML string and the bitmap image.</li><li value="2">The clipboard retains the original size of an inserted image. Any resizing of a bitmap image on the canvas does not affect the clipboard image. If you paste a bitmap onto the canvas, resize it, and then copy it to the clipboard, the original size of the image is maintained.</li><li value="3">If more than one bitmap image is selected for copying, only the main image is copied onto the clipboard.</li><li value="4">If you are copying a bitmap image with transparent pixels, one of the following occurs:</li><ul class="list"><li value="1">The Bitmap Transparency feature is disabled; the full transparent pixels of the image in the clipboard are replaced by black pixels on the canvas.</li><li value="2">The Bitmap Transparency feature is enabled; the full transparent pixels are replaced by the set Bitmap Transparency color and can be viewed using external graphics software. <br /><strong>NOTE:</strong> In order to be visible, the transparency color should be set to a color which is not already used in the bitmap image.</li></ul></ul>
+
+<h2>Pasting and Inserting Bitmap Images onto the Canvas</h2>
+
+<p>You can paste a bitmap image onto the canvas or replace a selected image element on the canvas. The following apply:</p>
+<ul class="list"><li value="1">If no elements are selected on the canvas, a new image is created on the canvas.</li><li value="2">The image of the selected elements is replaced by the bitmap image from the clipboard; however, the image properties, for example, shadow, angle, evaluations, etc., remain as initially set.</li><li value="3">The pasted bitmap image takes any resizing-factors applied to the image it replaced.</li><li value="4">Bitmap pixels can be set for transparency using the<strong> Bitmap Transparency</strong> feature.</li><li value="5">When you insert a bitmap file onto the canvas, it is stored as a stream inside a graphic page (XAML).</li></ul>
+
+<p> </p></div><div class="textmodule" id="14155629195">
+
+<h2>Related Topics</h2>
+
+<ul class="list"><li value="1"><strong>AutoCAD</strong></li></ul>
+
+<p>For workspace overview, see AutoCAD Importer.</p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13827585419" id="schema-linklist-link13827585419" href="13827585419.html">Importing an AutoCAD Drawing</a>.</p>
+<p>For background information, see <a class="schema-iframe-link" data-node-id="14154600203" id="schema-linklist-link14154600203" href="14154600203.html">AutoCAD File Import</a>.</p>
+<ul class="list"><li value="1"><strong>Bitmap Images</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14040950027" id="schema-linklist-link14040950027" href="14040950027.html">Bitmap Transparency Group.</a></p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13824556811" id="schema-linklist-link13824556811" href="13824556811.html">Applying Bitmap Transparency</a>.</p>
+<ul class="list"><li value="1"><strong>Graphic Template</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14153694219" id="schema-linklist-link14153694219" href="14153694219.html">Graphic Templates Browser</a>.</p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13827472139" id="schema-linklist-link13827472139" href="13827472139.html">Configuring Graphic Templates</a>.</p>
+<p>For background information, see <a class="schema-iframe-link" data-node-id="14154754955" id="schema-linklist-link14154754955" href="14154754955.html">Graphic Templates</a>.</p>
+<ul class="list"><li value="1"><strong>Symbol</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14040950027" id="schema-linklist-link14040950027" href="14040950027.html">Symbol Options.</a></p>
+<p>For related procedures, see Configuring and Assigning Symbols.</p>
+<p>For background information, see <a class="schema-iframe-link" data-node-id="14383775627" id="schema-linklist-link14383775627" href="14383775627.html">Symbol Basics</a>.</p>
+<ul class="list"><li value="1"><strong>Viewport</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14040872331" id="schema-linklist-link14040872331" href="14040872331.html#14040904971">Viewports</a>.</p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13826394635" id="schema-linklist-link13826394635" href="13826394635.html">Configuring Viewports</a>.</p>
+<p>For background information, see <a class="schema-iframe-link" data-node-id="14155051531" id="schema-linklist-link14155051531" href="14155051531.html">Viewports</a>.</p>
+<ul class="list"><li value="1"><strong>XAML</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14040872331" id="schema-linklist-link14040872331" href="14040872331.html">Elements Group.</a></p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13825546379" id="schema-linklist-link13825546379" href="13825546379.html#14096156299">Importing XAML</a>.</p>
+<ul class="list"><li value="1"><strong>XPS</strong></li></ul>
+
+<p>For workspace overview, see <a class="schema-iframe-link" data-node-id="14040872331" id="schema-linklist-link14040872331" href="14040872331.html">Elements Group.</a></p>
+<p>For related procedures, see <a class="schema-iframe-link" data-node-id="13825546379" id="schema-linklist-link13825546379" href="13825546379.html#14096156299">Importing XPS</a>.</p>
+<p> </p><div class="linklist"><a class="schema-iframe-link" data-node-id="14153388299" id="schema-linklist-link14153388299" href="14153388299.html"></a><a class="schema-iframe-link" data-node-id="13827585419" id="schema-linklist-link13827585419" href="13827585419.html"></a><a class="schema-iframe-link" data-node-id="14154600203" id="schema-linklist-link14154600203" href="14154600203.html"></a><a class="schema-iframe-link" data-node-id="14383775627" id="schema-linklist-link14383775627" href="14383775627.html"></a><a class="schema-iframe-link" data-node-id="14040872331" id="schema-linklist-link14040872331" href="14040872331.html#14040904971"></a><a class="schema-iframe-link" data-node-id="13826394635" id="schema-linklist-link13826394635" href="13826394635.html"></a><a class="schema-iframe-link" data-node-id="14155051531" id="schema-linklist-link14155051531" href="14155051531.html"></a><a class="schema-iframe-link" data-node-id="13824556811" id="schema-linklist-link13824556811" href="13824556811.html"></a><a class="schema-iframe-link" data-node-id="14153694219" id="schema-linklist-link14153694219" href="14153694219.html"></a><a class="schema-iframe-link" data-node-id="14154754955" id="schema-linklist-link14154754955" href="14154754955.html"></a><a class="schema-iframe-link" data-node-id="13827472139" id="schema-linklist-link13827472139" href="13827472139.html"></a><a class="schema-iframe-link" data-node-id="13825546379" id="schema-linklist-link13825546379" href="13825546379.html#14096156299"></a><a class="schema-iframe-link" data-node-id="14040950027" id="schema-linklist-link14040950027" href="14040950027.html"></a><a class="schema-iframe-link" data-node-id="14040872331" id="schema-linklist-link14040872331" href="14040872331.html"></a></div></div><section class="linklist-container" aria-labelledby="linklist-title"><h2 class="linklist-title" id="linklist-title">See also</h2><ul class="schema-linklist"><li><a class="schema-iframe-link" id="schema-linklist-link-14153388299" href="14153388299.html" data-node-id="14153388299">AutoCAD Importer</a></li></ul></section></article><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>

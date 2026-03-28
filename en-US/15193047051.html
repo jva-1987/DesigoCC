@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="15193047051" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Energy Reporting Troubleshooting" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="15102749579" /><meta name="next" content="15479356939" /><script>var fileExtension = "html";</script><title>Energy Reporting Troubleshooting</title></head><body class="schema-index content-container container" id="15193047051" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="15193047051" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657896459">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29658107915">Other Applications</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="13885407371">Energy Reporting</a></li><li class="breadcrumb-item active">Energy Reporting Troubleshooting</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-15193047051"><h1 id="heading-15193047051">Energy Reporting Troubleshooting</h1><div class="textmodule" id="15193051915">
+
+<h2>Display of Script Error</h2>
+
+<p><strong>Problem</strong>: Script error displays on accessing the energy reports in Application Viewer from the Remote Client.</p>
+<p><strong>Cause</strong>: Internet Explorer classified the web application as unsafe and denied access.</p>
+<p><strong>Solution</strong>:</p>
+<p>Open Internet Options and add your website / web application URL to Trusted Sites.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192485515__en__Web.png" width="403" height="532" /></figure>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192719499__en__Web.png" width="376" height="338" /></figure>
+<p> </p><div class="image"></div><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="15193059211">
+
+<h2>Generated Report Cannot be Opened with a Link, Macro, or Reaction</h2>
+
+<p><strong>Problem</strong>: Generated report cannot be opened with a Link, Macro, or Reaction</p>
+<p><strong>Cause 1</strong>: The Credentials of Link is not set or is invalid.</p>
+<p><strong>Solution 1</strong>: Navigate to the Link and set credentials in Application Viewer with an account that has full system access rights.  </p>
+<p><strong>Cause 2</strong>: The file format property of the link (P2 Value) is not the same as set in <strong>Execute</strong> expander of link or command column of the macro or reaction.</p>
+<p><strong>Solution 2</strong>: Ensure that the file format is the same everywhere.  </p>
+<p> </p></div><div class="textmodule" id="15193064715">
+
+<h2>Media Group Selection in the Parameter Dialog Box does not show Expected Values</h2>
+
+<p><strong>Problem</strong>: Media Group selection in the Parameter dialog box does not show expected values.</p>
+<p><strong>Cause</strong>: The Default Web Client's Management Station Security Group restricts the access.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192003723__en__Web.png" width="760" height="340" /></figure>
+<p><strong>Solution</strong>: Remove the Default Web Client from the DefaultStations Security Group to grant access. (See No Access to View Reports for more information).</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192007307__en__Web.png" width="464" height="204" /></figure>
+<p> </p><div class="image"></div><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="15193071627">
+
+<h2>No Access to View Reports</h2>
+
+<p><strong>Problem: </strong>The message <strong>No access to view this report</strong> displays when executing a report.</p>
+<p><strong>Cause 1</strong>: When you run an Advanced Report in the Application Viewer you are actually running it under the Default Web Client with its assigned scope and application rights. This applies also to the Configuration Page. In the case of the HQ TBS, BA and FS project templates the Default Web Client is associated with the DefaultStations security group. This Management Station Security Group uses the Default Authorization Scope and reduced Application Rights to restrict the rights when accessing the project with a Web Client. In the case of HQ TBS, BA and FS project templates, the Application View , for example, is excluded. This is why the system denies the Default Web Client access to this View.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192003723__en__Web.png" width="760" height="340" /></figure>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192000139__en__Web.png" width="668" height="71" /></figure>
+<p><strong>Solution 1</strong>: Remove the Default Web Client from the DefaultStations Security Group to grant access.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192007307__en__Web.png" width="464" height="204" /></figure>
+<p><strong>Cause 2</strong>: Status of the Web Services (WSI) manager in the Manager Details expander of the project in SMC is <code>Initializing</code>.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15191702155__en__Web.png" width="753" height="67" /></figure>
+<p><strong>Solution 2</strong>: In case there are several running projects on the same server (SMC), verify that each project has a unique Web Service port number.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/15192010891__en__Web.png" width="325" height="103" /></figure>
+<p><strong>Cause 3</strong>: Status of the Web Services (WSI) manager in the Manager Details expander of the project in SMC is <code>Stopped</code> (and possibly Mode = manual).<br /><strong>Solution 3</strong>: Open WinCC Console and fix the issue.</p>
+<p> </p><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="19495957899">
+
+<h2>Missing Consumption Cache for Certain Meters</h2>
+
+<p><strong>Problem</strong>: Missing Consumption Cache for Certain Meters</p>
+<p><strong>Cause</strong>: If the managed meter has irregular readings, then for such a meter, the consumption cache will not be generated from the date on which the meter readings are irregular, till the irregularity is rectified.</p>
+<p><strong>Solution</strong>: Perform the irregularity check on the managed meters (see <em>Managed Meter Irregularities</em> in <a target="_blank" href="14072518667.html">Overview of Managed Meters</a>). The irregular readings can be corrected using the manual correction application.</p></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div></article><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>

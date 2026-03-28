@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="14237990539" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Management Platform Gateway" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="15488916363" /><meta name="next" content="14789070347" /><script>var fileExtension = "html";</script><title>Management Platform Gateway</title></head><body class="schema-index content-container container" id="14237990539" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="14237990539" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657896459">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="29657988491">Subsystem Integration</a></li><li class="breadcrumb-item active">Management Platform Gateway</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-14237990539"><h1 id="heading-14237990539">Management Platform Gateway</h1><div class="metalist"></div><p>This section includes background information on working with the management platform <span class="variable">Desigo CC</span> gateway to integrate subsystem 1 in subsystem 2. For related procedures and workflows, see the <a class="schema-iframe-link" data-node-id="14237860363" id="schema-linklist-link14237860363" href="14237860363.html">step-by-step</a> section.</p><figure class="img_original" aria-label="Fig. "><img src="../Images/png/13916022795__Web.png" alt="Example Topology 1: OPC and BACnet" width="425" height="143" /><figcaption class="image-title">Example Topology 1: OPC and BACnet</figcaption></figure><figure class="img_original" aria-label="Fig. "><img src="../Images/png/14029676043__Web.png" alt="Example Topology 2: OPC and Modbus" width="425" height="143" /><figcaption class="image-title">Example Topology 2: OPC and Modbus</figcaption></figure><p>The following description (workflows, examples) refers to, however, the integration of OPC and BACnet.</p><p>Among the main features of integration in <span class="variable">Desigo CC</span> are:</p><ul class="list"><li value="1">The values transmitted per script from one subsystem to the next, can be converted. Good examples are the Enum values in BACnet, that generally start with 1, whereas they start with 0 on OPC.</li><li value="2">Values that do not need to be transmitted or converted, can be used directly in <span class="variable">Desigo CC</span> (for example, a reference in a graphic symbol).</li><li value="3">Mappings operate bidirectionally.</li><li value="4">The conversion methods available in the library are described in. Conversions with custom scripts can be performed at any time.</li><li value="5">The assignment must occur for each transmitted data point.</li><li value="6">The required functions must be performed as COV or polling.</li><li value="7">The required scripts are available in the <span class="variable">Desigo CC</span> library;</li><li value="8">Virtual <span class="variable">Desigo CC</span> data points can be created, for example, when an average must be calculated from two data points.</li><li value="9">No new values can be updated between subsystem 1 and subsystem 2, if the <span class="variable">Desigo CC</span> management platform is unavailable.</li></ul><p> </p><div class="textmodule" id="14238606347">
+
+<h2>Technical Implementation</h2>
+
+<p>Data points that are forwarded or converted, must be extended using a corresponding SX function. </p>
+<p>After an OPC import:</p>
+<ul class="list"><li value="1">Data points must be supplemented with a script for forwarding to a BACnet device.</li><li value="2">All other OPC data points can be used without additional processing (for example, display in the graphic) in <span class="variable">Desigo CC</span>.</li><li value="3">The three script examples are saved to a library. Only one script must be customized for migration.</li></ul><figure class="img_original" aria-label="Fig. "><img src="../Images/png/13255430539__Web.png" alt="Technical Implementation" width="982" height="612" /><figcaption class="image-title">Technical Implementation</figcaption></figure>
+
+<h2>Explanation:</h2>
+
+<ul class="list"><li value="1">There are only one-way actions (OPC -&gt; BACnet or BACnet -&gt; OPC).</li><li value="2">The function must be employed as needed.</li></ul>
+
+<h2>Subscription</h2>
+
+<p>To an OPC or BACnet data point:</p>
+<ul class="list"><li value="1">In principle, a change of value to an OPC device starts a function that writes the changed value to the corresponding BACnet data point and vice-versa.</li><li value="2">The OPC/BACnet driver communicates automatically with the connected OPC or BACnet data point and the corresponding element of the OPC or BACnet devices. A subscription to an OPC or BACnet data point is all that is required to be able to react to a device change of value.</li></ul>
+
+<p><strong>Polling</strong> </p>
+<p>To an OPC or BACnet data point:</p>
+<ul class="list"><li value="1">Polling is performed with read/write in a time loop.</li><li value="2">This variant results in increased network load, since <span class="variable">Desigo CC</span> queries values at a relatively short interval. Using various polling cycles can optimize the network load.</li></ul>
+
+<p> </p>
+<div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="14238607371">
+
+<h2>Script Example</h2>
+
+<p>The following codes are examples of how they can be used. The exact function application is described in the script as a comment.</p>
+<figure class="img_original" aria-label="Fig. "><img src="../Images/png/13926419083__Web.png" alt="Script Example for SXAdd" width="970" height="430" /><figcaption class="image-title">Script Example for SXAdd</figcaption></figure>
+<p> </p>
+<p class="codeblock" aria-label="codeblock">///ApplicationView_Logics_Scripts_SXOpenMainScript.SXOpenMainScript.v=1_8.b=3_1_0021_0.10001.SX Open Main Script.</p>
+<p class="codeblock" aria-label="codeblock">///ApplicationView_Logics_Scripts_SXOpenMainScript.SXOpenMainScript.v=1_8.b=3_1_0021_0.10001.SX Open Main Script.</p>
+<p class="codeblock" aria-label="codeblock">// The Main Script is an example to show how to use the SX Open Replacement in Management Platform</p>
+<p class="codeblock" aria-label="codeblock">// Version 1.8 (31.01.2019)</p>
+<p class="codeblock" aria-label="codeblock">// Strict mode makes it easier to write "secure" code, introducing better error-checking</p>
+<p class="codeblock" aria-label="codeblock">'use strict';</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//---------------------------</p>
+<p class="codeblock" aria-label="codeblock">//        SX Open Main Script</p>
+<p class="codeblock" aria-label="codeblock">//---------------------------</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">/*</p>
+<p class="codeblock" aria-label="codeblock">---------------------------------------------------------------------------------</p>
+<p class="codeblock" aria-label="codeblock">Syntax of a subscription (3 lines):</p>
+<p class="codeblock" aria-label="codeblock">----------------------------------</p>
+<p class="codeblock" aria-label="codeblock">line 1:    // subscription 001 - SXAdd -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">line 2:    var result001 = subscribeValues(&lt;objectReference&gt;,&lt;propertyNames&gt;,&lt;callback&gt;,&lt;initialValue&gt;);</p>
+<p class="codeblock" aria-label="codeblock">line 3:    function Opc2Bac001(object, values) {&lt;Parser.OPCxxx&gt;(object,&lt;objectReference&gt;,&lt;"SX Open Function"&gt;,Param01[...Param40]);}</p>
+<p class="codeblock" aria-label="codeblock">---------------------------------------------------------------------------------</p>
+<p class="codeblock" aria-label="codeblock">-- Parser function are used in case of number of parameter ---------------</p>
+<p class="codeblock" aria-label="codeblock">        Parser.OPCxx are used for OPC-&gt;BACnet</p>
+<p class="codeblock" aria-label="codeblock">        Parser.BACxx are used for BACnet-&gt;OPC</p>
+<p class="codeblock" aria-label="codeblock">-----------------------------------------</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC00 is used for: SXBoolToMulti, SXMultiToBool</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC01 is used for: SXAdd, SXBitPos, SXConst, SXDiv, SXEqual, SXMul, SXSubstract, SXWriteBit, SXDirect</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC02 is used for: SXBetween, SXSelectBool, SXBitSet, SXScaleBAC</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC03 is used for: SXAddLimiter, SXSelectVal1</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC16 is used for: SXAvg</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC32 for: SXIntToMulti, SXMulitToInt, SXMulitState2BstrHash, SXBstrHash2MultiState, SXIntFromBits</p>
+<p class="codeblock" aria-label="codeblock">Parser.OPC40 is NOT IMPLEMENTED as this SX Open Function is not defined!!!</p>
+<p class="codeblock" aria-label="codeblock">----------</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC00 is used for; SXBoolToMulti, SXMultiToBool, </p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC01 is used for: SXAdd, SXBitPos, SXConst, SXDiv, SXEqual, SXMul, SXSubstract, SXWriteBit, SXDirect</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC02 is used for: SXBetween, SXSelectBool, SXBitSet, SXScaleOPC</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC03 is used for: SXAddLimiter, SXSelectVal1</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC16 is used for: SXAvg</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC32 for: SXIntToMulti, SXMulitToInt, SXMulitState2BstrHash, SXBstrHash2MultiState, SXIntFromBits</p>
+<p class="codeblock" aria-label="codeblock">Parser.BAC40 is NOT IMPLEMENTED as this SX Open Function is not defined!!!</p>
+<p class="codeblock" aria-label="codeblock">------------</p>
+<p class="codeblock" aria-label="codeblock">Parser.SpecValue(Value, TargetObject, TargetProperty, ConsoleOutput) : to write a value to a defined property (e.g. LoLm/HiLm ...)</p>
+<p class="codeblock" aria-label="codeblock">---------------------------------------------------------------------------------</p>
+<p class="codeblock" aria-label="codeblock">*/</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// the Parser contains function according the amount of parameters and give back the result of the "SX Open Function"</p>
+<p class="codeblock" aria-label="codeblock">// Parser Script from ApplicationView</p>
+<p class="codeblock" aria-label="codeblock">var Parser = include("SXOpenParser");</p>
+<p class="codeblock" aria-label="codeblock">// Parser Script from SX OPEN library</p>
+<p class="codeblock" aria-label="codeblock">// var Parser = include("SXOpenParser", "BA_Software_SXOPEN_1")</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// ConsoleOutput is used to show the result of COV in the console of the Script Editor (true or false)</p>
+<p class="codeblock" aria-label="codeblock">var ConsoleOutput = true;</p>
+<p class="codeblock" aria-label="codeblock">// This TextGroups are used for different MultiState State-Text in the SXOpenFunction "SXMultiStateToBstrHash" ==&gt;&gt; see below Subscription 013</p>
+<p class="codeblock" aria-label="codeblock">// The name of the text group contains the number defined in the Excel sheet for OPC configuration!</p>
+<p class="codeblock" aria-label="codeblock">var TextGroup9160 = ["S1", "S2", "S3", "S4"];   // index implicit =&gt; [0, 1, 2, 3]</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">//  OPC -&gt; BACnet with COV</p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 001a - SXAdd -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result001a = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXAdd_AI","Value", Opc2Bac001a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac001a(object, values) {Parser.OPC01(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'AVAL01" , "SXAdd", ConsoleOutput, 10);    }</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 001b - SXAdd -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result001b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAdd.CC_SXAdd_AV","Value", Opc2Bac001b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac001b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Add.3" , "SXAdd", ConsoleOutput, 10);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 001c - SXAdd -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result001c = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAdd.CC_SXAdd_MSI","Value", Opc2Bac001c, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac001c(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Add.6" , "SXAdd", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 001d - SXAdd -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result001d = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAdd.CC_SXAdd_MSV","Value", Opc2Bac001d, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac001d(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Add.4" , "SXAdd", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 002a - SXAddLimiter -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result002 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAddLimiter.CC_SXAddLimiter_AI","Value", Opc2Bac002a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac002a(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.AddLimite.5" , "SXAddLimiter", ConsoleOutput, 1, 3, 4);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 002b - SXAddLimiter -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result002 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAddLimiter.CC_SXAddLimiter_AV","Value", Opc2Bac002b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac002b(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.AddLimite.3" , "SXAddLimiter", ConsoleOutput, 1, 3, 4);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 002c - SXAddLimiter -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result002 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAddLimiter.CC_SXAddLimiter_MSI","Value", Opc2Bac002c, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac002c(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.AddLimite.6" , "SXAddLimiter", ConsoleOutput, 1, 3, 4);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 002d - SXAddLimiter -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result002 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAddLimiter.CC_SXAddLimiter_MSV","Value", Opc2Bac002d, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac002d(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.AddLimite.4" , "SXAddLimiter", ConsoleOutput, 1, 3, 4);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 003a - SXAIarray (SXDirect!) -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result003a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXArray.CC_SXAIarray","Value", Opc2Bac003a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac003a(object, values) </p>
+<p class="codeblock" aria-label="codeblock">    {</p>
+<p class="codeblock" aria-label="codeblock">        Parser.OPC01(values.Value.value.value[0],"System11.LogicalView:Logical.Rack4053.BACnetDP.AIarray.5", "SXDirect", ConsoleOutput, 0);</p>
+<p class="codeblock" aria-label="codeblock">        Parser.OPC01(values.Value.value.value[1],"System11.LogicalView:Logical.Rack4053.BACnetDP.AIarray.6", "SXDirect", ConsoleOutput, 0);</p>
+<p class="codeblock" aria-label="codeblock">    }</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 003b - SXBIarray (SXDirect!) -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result003b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXArray.CC_SXBIarray","Value", Opc2Bac003b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac003b(object, values) </p>
+<p class="codeblock" aria-label="codeblock">    {</p>
+<p class="codeblock" aria-label="codeblock">        Parser.OPC01(values.Value.value.value[0],"System11.LogicalView:Logical.Rack4053.BACnetDP.AIarray.8", "SXDirect", ConsoleOutput, 0);</p>
+<p class="codeblock" aria-label="codeblock">        Parser.OPC01(values.Value.value.value[1],"System11.LogicalView:Logical.Rack4053.BACnetDP.AIarray.11", "SXDirect", ConsoleOutput, 0);</p>
+<p class="codeblock" aria-label="codeblock">    }</p>
+<p class="codeblock" aria-label="codeblock">    </p>
+<p class="codeblock" aria-label="codeblock">    </p>
+<p class="codeblock" aria-label="codeblock">    </p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 004 - SXAvg -&gt; Parser.OPC16</p>
+<p class="codeblock" aria-label="codeblock">var result004 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXAvg.CC_SXAvg_AI","Value", Opc2Bac004, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac004(object, values) {Parser.OPC16(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Avg.5" , "SXAvg", ConsoleOutput, 2, 10, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 005 - SXBetween -&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result005 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXBetween.CC_SXBetween_BI","Value", Opc2Bac005, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac005(object, values) {Parser.OPC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Between.8" , "SXBetween", ConsoleOutput, 10, 20);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 006a - SXBitPos -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result006a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXBitPos.CC_SXBitPos_MSI","Value", Opc2Bac006a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac006a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.BitPos.6" , "SXBitPos", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 006b - SXBitPos -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result006b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXBitPos.CC_SXBitPos_MSV","Value", Opc2Bac006b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac006b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.BitPos.4" , "SXBitPos", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 007a - SXBoolToMulti -&gt; Parser.OPC00</p>
+<p class="codeblock" aria-label="codeblock">var result007a = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXBoolToMulti_MSI","Value", Opc2Bac007a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac007a(object, values) {Parser.OPC00(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXbool2MS'MVAL01" , "SXBoolToMulti", ConsoleOutput);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 007b - SXBoolToMulti -&gt; Parser.OPC00</p>
+<p class="codeblock" aria-label="codeblock">var result007b = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXBoolToMulti_MSV","Value", Opc2Bac007b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac007b(object, values) {Parser.OPC00(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXbool2MS'MVAL02" , "SXBoolToMulti", ConsoleOutput);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 008a - SXDiv -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result008a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXDiv.CC_SXDiv_AI","Value", Opc2Bac008a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac008a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Div.5" , "SXDiv", ConsoleOutput, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 008b - SXDiv -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result008b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXDiv.CC_SXDiv_AV","Value", Opc2Bac008b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac008b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Div.3" , "SXDiv", ConsoleOutput, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 009 - SXEqual -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result009 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXEqual.CC_SXEqual_BI","Value", Opc2Bac009, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac009(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Equal.8" , "SXEqual", ConsoleOutput, 10);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 010 - SXIntToMulti -&gt; Parser.OPC32</p>
+<p class="codeblock" aria-label="codeblock">var result010 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXIntToMulti.CC_SXIntToMulti_MSV","Value", Opc2Bac010, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac010(object, values) {Parser.OPC32(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.ItoM.4", "SXIntToMulti" , ConsoleOutput, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 011a - SXMul -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result011a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXMul.CC_SXMul_AI", "Value", Opc2Bac011a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac011a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Mul.5" , "SXMul", ConsoleOutput, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 011b - SXMul -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result011b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXMul.CC_SXMul_AV", "Value", Opc2Bac011b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac011b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Mul.3" , "SXMul", ConsoleOutput, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 012a - SXMultiMap (function: Parser.OPC01-&gt;SXDirect for Value, Parser.SpecValue for Limits)</p>
+<p class="codeblock" aria-label="codeblock">// 012a: subscription for Value</p>
+<p class="codeblock" aria-label="codeblock">var result012a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXMultiMap.CC_SXAnalogInputPrval", "Value", Opc2Bac012a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac012a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.MultiMap.5" , "SXDirect", ConsoleOutput, 0);}</p>
+<p class="codeblock" aria-label="codeblock">// 012b: Polling for Limits</p>
+<p class="codeblock" aria-label="codeblock">setInterval(polling012b, 5000)</p>
+<p class="codeblock" aria-label="codeblock">function polling012b() {</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.SXBAC.CC2SX.SXMultiMap.CC_SXAnalogInputLoLm","Value");</p>
+<p class="codeblock" aria-label="codeblock">    Parser.SpecValue(objValueRead.Value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.MultiMap.1", "Low_Limit", ConsoleOutput);</p>
+<p class="codeblock" aria-label="codeblock">    //</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.SXBAC.CC2SX.SXMultiMap.CC_SXAnalogInputHiLm","Value");</p>
+<p class="codeblock" aria-label="codeblock">    Parser.SpecValue(objValueRead.Value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.MultiMap.1" , "High_Limit", ConsoleOutput)</p>
+<p class="codeblock" aria-label="codeblock">} </p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 013 - SXMultiState2BstrHash -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result013 = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXMultiState2BstrHash_MSI","Value", Opc2Bac013, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac013(object, values) {Parser.OPC01(values.Value.value.value,"System11.ApplicationView:ApplicationView.Logics.VirtualObjects.SX_OPCms2Bstr" , "SXMultiState2BstrHash" , ConsoleOutput, TextGroup9160);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">/============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 014 - SXMultiToInt -&gt; Parser.OPC32</p>
+<p class="codeblock" aria-label="codeblock">var result014 = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXMultiToInit_AI","Value", Opc2Bac014, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac014(object, values) {Parser.OPC32(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'AVALOP01" , "SXMultiToInt" , ConsoleOutput, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 1010, 1111, 1212, 1313, 1414, 1515, 1616, 1717, 1818, 1919, 2020, 2121, 2222, 2323, 2424, 2525, 2626, 2727, 2828, 2929, 3030, 3131, 3232);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 015a - SXMultiToBool -&gt; Parser.OPC00</p>
+<p class="codeblock" aria-label="codeblock">var result015a = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXM2B_BI"  ,"Value", Opc2Bac015a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac015a(object, values) {Parser.OPC00(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXms2Bool'BVAL01"  , "SXMultiToBool", ConsoleOutput);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 015b - SXMultiToBool -&gt; Parser.OPC00</p>
+<p class="codeblock" aria-label="codeblock">var result015b = subscribeValues( "System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXM2B_BV" ,"Value", Opc2Bac015b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac015b(object, values) {Parser.OPC00(values.Value.value.value, "System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXms2Bool'BVAL02" , "SXMultiToBool", ConsoleOutput);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 016a - SXScaleBAC -&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result016a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXScaleBAC.CC_SXScaleBAC_AI" ,"Value", Opc2Bac016a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac016a(object, values) {Parser.OPC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.ScaleBAC.5" , "SXScaleBAC", ConsoleOutput, 5, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 016b - SXScaleBAC -&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result016b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXScaleBAC.CC_SXScaleBAC_AV" ,"Value", Opc2Bac016b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac016b(object, values) {Parser.OPC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.ScaleBAC.3" , "SXScaleBAC", ConsoleOutput, 5, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 017a - SXScaleOPC -&gt; Parser.OPC02 (Used to calc back a BACnet Value to OPC -&gt; op</p>
+<p class="codeblock" aria-label="codeblock">var result017a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXScaleOPC.CC_SXScaleOPC_AI" ,"Value", Bac2Opc017a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Bac2Opc017a(object, values) {Parser.BAC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.ScaleOPC.5" , "SXScaleOPC", ConsoleOutput, 5, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 017b - SXScaleOPC -&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result017b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXScaleOPC.CC_SXScaleOPC_AV" ,"Value", Bac2Opc017b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Bac2Opc017b(object, values) {Parser.BAC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.ScaleOPC.3" , "SXScaleOPC", ConsoleOutput, 5, 2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 018 - SXSelectBool -&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result018 = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSelectBool.CC_SXSelectBool_AI" ,"Value" , Opc2Bac018, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac018(object, values) {Parser.OPC02(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.SelectB.5"  , "SXSelectBool", ConsoleOutput, 10, 20);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 019a - SXSelectVal1 -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result019a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSelectVal1.CC_SXSelectVal1_AI" ,"Value", Opc2Bac019a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac019a(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.SelectV.5"  , "SXSelectVal1", ConsoleOutput, 100, 20, 10);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 019b - SXSelectVal1 -&gt; Parser.OPC03</p>
+<p class="codeblock" aria-label="codeblock">var result019b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSelectVal1.CC_SXSelectVal1_MSI" ,"Value", Opc2Bac019b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac019b(object, values) {Parser.OPC03(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.SelectV.6"  , "SXSelectVal1", ConsoleOutput, 100, 2, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 020a - SXSubstract -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result020a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSubtract.CC_SXSubtract_AI" ,"Value", Opc2Bac020a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac020a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Substract.5"  , "SXSubstract", ConsoleOutput, 10);}</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 020b - SXSubstract -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result020b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSubtract.CC_SXSubtract_AV" ,"Value", Opc2Bac020b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac020b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Substract.3"  , "SXSubstract", ConsoleOutput, 10);}</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 020c - SXSubstract -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result020c = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSubtract.CC_SXSubtract_MSI" ,"Value", Opc2Bac020c, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac020c(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Substract.6"  , "SXSubstract", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 020d - SXSubstract -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result020d = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXSubtract.CC_SXSubtract_MSV" ,"Value", Opc2Bac020d, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac020d(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.Substract.4"  , "SXSubstract", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 021a - SXWriteBit -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result021a = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXWriteBit.CC_SXWriteBit_MSI" ,"Value", Opc2Bac021a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac021a(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.WriteBit.6"  , "SXWriteBit", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 021b - SXWriteBit -&gt; Parser.OPC01</p>
+<p class="codeblock" aria-label="codeblock">var result021b = subscribeValues("System11.LogicalView:Logical.SXBAC.CC2SX.SXWriteBit.CC_SXWriteBit_MSV" ,"Value", Opc2Bac021b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac021b(object, values) {Parser.OPC01(values.Value.value.value,"System11.LogicalView:Logical.Rack4053.BACnetDP.WriteBit.4"  , "SXWriteBit", ConsoleOutput, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 022 - SXIntFromBits -&gt; Parser.OPC32</p>
+<p class="codeblock" aria-label="codeblock">var result022 = subscribeValues("System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXIntFromBits_AI"  ,"Value", Opc2Bac022, false);</p>
+<p class="codeblock" aria-label="codeblock">// ATTENTION!! The Value of above AI (subcription) is set as COUNT for this function</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac022(object, values) {Parser.OPC32(values.Value.value.value,"System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXintFroB'AVAL01"  , "SXIntFromBits" , ConsoleOutput, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subscription 023a - SXBitSet-&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">var result023a = subscribeValues( "System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXBitSet_AI"  ,"Value", Opc2Bac023a, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac023a(object, values) {Parser.OPC02(values.Value.value.value, "System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXbitSet'AVAL01" , "SXBitSet", ConsoleOutput, 5, 12);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">// Subscription 023b - SXBitSet-&gt; Parser.OPC02</p>
+<p class="codeblock" aria-label="codeblock">// ATTENTION!! This example has a special second line to show how it works! If the input value subscription 23a and 23b are the same, the same result are expected! Value of 23a is allways 12!</p>
+<p class="codeblock" aria-label="codeblock">var result023b = subscribeValues( "System11.ManagementView:ManagementView.FieldNetworks.SXOpen.Server_Softing.CC2SX.CC_SXBitSet_AI2"  ,"Value", Opc2Bac023b, false);</p>
+<p class="codeblock" aria-label="codeblock">function Opc2Bac023b(object, values) {var P2 = values.Value.value.value; Parser.OPC02(values.Value.value.value, "System11.ManagementView:ManagementView.FieldNetworks.MON1.Hardware.MON1'M1aB00.SXopen1'IO01'SXbitSet'AVAL02" , "SXBitSet", ConsoleOutput, 5, P2);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">//  BACnet -&gt; OPC with COV</p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">// Subcription 101 - SXBetween -&gt; Parser.BAC02</p>
+<p class="codeblock" aria-label="codeblock">//var result004 = subscribeValues(,, BacToOpc101, false);</p>
+<p class="codeblock" aria-label="codeblock">//function BacToOpc101(object, values) {Parser.BAC02(values.Value.value.value, "System11.LogicalView:Logical.Rack4053.BACnet1.22", "SXBetween", ConsoleOutput, 20, 29);}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">//  OPC -&gt; BACnet with Polling</p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">/*</p>
+<p class="codeblock" aria-label="codeblock">=====</p>
+<p class="codeblock" aria-label="codeblock">setInterval(repeatMe1, 10000)</p>
+<p class="codeblock" aria-label="codeblock">function repeatMe1() {</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.Static.IOP_static_R4","Value");       Parser.OPC02(objValueRead.Value.value, "System11.LogicalView:Logical.Rack4053.BACnet1.20", "SXBetween", ConsoleOutput, 20, 29)</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.Static.IOP_static_R4","Value");       Parser.OPC02(objValueRead.Value.value, "System11.LogicalView:Logical.Rack4053.BACnet1.20", "SXBetween", ConsoleOutput, 20, 29)</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.Static.IOP_static_R4","Value");       Parser.OPC02(objValueRead.Value.value, "System11.LogicalView:Logical.Rack4053.BACnet1.20", "SXBetween", ConsoleOutput, 20, 29)</p>
+<p class="codeblock" aria-label="codeblock">    var objValueRead =read("System11.LogicalView:Logical.Static.IOP_static_R4","Value");       Parser.OPC02(objValueRead.Value.value, "System11.LogicalView:Logical.Rack4053.BACnet1.20", "SXBetween", ConsoleOutput, 20, 29)</p>
+<p class="codeblock" aria-label="codeblock">}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">function repeatMe2(test2) {</p>
+<p class="codeblock" aria-label="codeblock">console("I am repeating 2 - 5000 - test2:{0}", test2);</p>
+<p class="codeblock" aria-label="codeblock">}</p>
+<p class="codeblock" aria-label="codeblock"></p>
+<p class="codeblock" aria-label="codeblock">setInterval(repeatMe2,5000,20)</p>
+<p class="codeblock" aria-label="codeblock">setInterval(repeatMe2,6000,60)</p>
+<p class="codeblock" aria-label="codeblock">*/</p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p class="codeblock" aria-label="codeblock">//  BACnet -&gt; OPC with Polling</p>
+<p class="codeblock" aria-label="codeblock">//============</p>
+<p> </p>
+<div class="image"></div><div class="linklist"></div></div><div class="textmodule" id="14238608395"><h2>Supported Functions</h2><table class="table tabletype-framed table-scaled" aria-label="" data-legend-id="ID0EE6YPB"><colgroup><col style="width: 2.70cm;"></col><col style="width: 3.02cm;"></col><col style="width: 1.75cm;"></col><col style="width: 3.97cm;"></col><col style="width: 5.40cm;"></col></colgroup><tbody><tr><td colspan="5"><p class="text-center"><strong>Conversion functions</strong></p></td></tr><tr><td><p class="text-left"><strong>Function</strong></p></td><td><p class="text-left"><strong>Inverse function</strong></p></td><td><p class="text-left"><strong>Number of Para.</strong></p></td><td><p class="text-left"><strong>Parameter</strong></p></td><td><p class="text-left"><strong>Description</strong></p></td></tr><tr><td><p class="text-left">SXAdd</p></td><td><p class="text-left">SXSubtract</p></td><td><p class="text-center">1</p></td><td><p class="text-left">offset</p></td><td><p class="text-left">result := input + offset </p></td></tr><tr><td><p class="text-left">SXAddLimiter</p></td><td><p class="text-left">SXSubtract</p></td><td><p class="text-center">3</p></td><td><p class="text-left">offset, max, overflow_val</p></td><td><p class="text-left"><strong>if</strong> input &lt; max </p><p class="text-left"><strong>then</strong> result := input + offset</p><p class="text-left"><strong>else</strong> result := overflow_val</p></td></tr><tr><td><p class="text-left">SxSubtract</p></td><td><p class="text-left">SXAdd</p></td><td><p class="text-center">1</p></td><td><p class="text-left">offset</p></td><td><p class="text-left">result := input - offset </p></td></tr><tr><td><p class="text-left">SXBitPos</p></td><td><p class="text-left">SXWriteBit</p></td><td><p class="text-center">1</p></td><td><p class="text-left">bit; 0 &lt;= bit &lt;= 31</p></td><td><p class="text-left">result := input &amp; (1 &gt;&gt; bit) &amp; 0x0001</p></td></tr><tr><td><p class="text-left">SXWriteBit</p></td><td><p class="text-left">SXBitPos</p></td><td><p class="text-center">1</p></td><td><p class="text-left">bit; 0 &lt;= bit &lt;= 31 </p></td><td><p class="text-left">result := (input &lt;&lt; bit) </p></td></tr><tr><td><p class="text-left">SXDirect</p></td><td><p class="text-left">SXDirect</p></td><td><p class="text-center">1</p></td><td><p class="text-left">not used</p></td><td><p class="text-left">result := input</p></td></tr><tr><td><p class="text-left">SXBoolToMulti</p><p class="text-left"> </p></td><td><p class="text-left">SXMultiToBool</p></td><td><p class="text-center">0</p></td><td><p class="text-left">-</p></td><td><p class="text-left"><strong>if</strong> input &lt; 0</p><p class="text-left"><strong>then</strong> result := 2</p><p class="text-left"><strong>else</strong> result := 1</p></td></tr><tr><td><p class="text-left">SXMutliToBool</p></td><td><p class="text-left">SXBoolToMulti</p></td><td><p class="text-center">0</p></td><td><p class="text-left">-</p></td><td><p class="text-left"><strong>if</strong> input &gt; 1</p><p class="text-left"><strong>then</strong> result := -1</p><p class="text-left"><strong>else</strong> result := 0</p></td></tr><tr><td><p class="text-left">SXIntToMulti</p></td><td><p class="text-left">SXMultiToInit</p></td><td><p class="text-center">-2</p></td><td><p class="text-left">cnt, int1, int2, …, int&lt;cnt&gt;</p><p class="text-left">1 &lt;= cnt &lt;=32</p></td><td><p class="text-left"><strong>if</strong> input == int1</p><p class="text-left"><strong>then</strong> result := 1</p><p class="text-left"><strong>else if</strong> input == int2</p><p class="text-left"><strong>then</strong> result := 2</p><p class="text-left"><strong>else if</strong></p><p class="text-left">…</p><p class="text-left"><strong>else</strong> result := cnt + 1</p></td></tr><tr><td><p class="text-left">SXMultiToInit</p></td><td><p class="text-left">SXIntToMulti</p></td><td><p class="text-center">-2</p></td><td><p class="text-left">cnt, int1, int2, …</p><p class="text-left">1 &lt;= cnt &lt;= 31</p></td><td><p class="text-left"><strong>if</strong> input == 1 </p><p class="text-left"><strong>then</strong> result := int1</p><p class="text-left"><strong>else if</strong> input == 2</p><p class="text-left"><strong>then</strong> result := int2</p><p class="text-left"><strong>else if</strong> …</p><p class="text-left"><strong>else</strong> result := int&lt;cnt&gt;</p></td></tr><tr><td><p class="text-left">SXScaleBAC</p></td><td><p class="text-left">SXScaleOPC</p></td><td><p class="text-center">2</p></td><td><p class="text-left">offset, denom</p><p class="text-left">denom != 0</p></td><td><p class="text-left">result = (input+ offset) / denom</p></td></tr><tr><td><p class="text-left">SXScaleOPC</p></td><td><p class="text-left">SXScaleBAC</p></td><td><p class="text-center">2</p></td><td><p class="text-left">offset, denom</p><p class="text-left">denom != 0</p></td><td><p class="text-left">result :== (input *denom) – offset</p></td></tr><tr><td><p class="text-left">SXMul</p></td><td><p class="text-left">SXDiv</p></td><td><p class="text-center">1</p></td><td><p class="text-left">factor</p></td><td><p class="text-left">result := input * factor</p></td></tr><tr><td><p class="text-left">SXDiv</p></td><td><p class="text-left">SXMul</p></td><td><p class="text-center">1</p></td><td><p class="text-left">factor</p><p class="text-left">factor != 0</p></td><td><p class="text-left">result := input / factor</p></td></tr><tr><td><p class="text-left">MultiState2</p><p class="text-left">BstrHash</p><p class="text-left"> </p></td><td><p class="text-left">BstrHash2</p><p class="text-left">MultiState</p><p class="text-left"> </p></td><td><p class="text-center">-1</p></td><td><p class="text-left">cnt, hash1, hash2, …, hash&lt;cnt&gt;</p><p class="text-left">1 &lt;= cnt &lt;= 30</p></td><td><p class="text-left"><strong>if</strong> 1 &lt;= input &lt;= 30 &amp;&amp; input &lt;= cnt</p><p class="text-left"><strong>then</strong> result := hash&lt;input&gt;</p><p class="text-left"><strong>else</strong> result := 0</p></td></tr><tr><td><p class="text-left">BstrHash2</p><p class="text-left">MultiState </p><p class="text-left"> </p></td><td><p class="text-left">MultiState2</p><p class="text-left">BstrHash</p><p class="text-left"> </p></td><td><p class="text-center">-1</p></td><td><p class="text-left">cnt, hash1, hash2, …, hash&lt;cnt&gt;</p></td><td><p class="text-left"><strong>if</strong> input == hash1</p><p class="text-left"><strong>then</strong> result := 1</p><p class="text-left"><strong>else if</strong> input == hash2</p><p class="text-left"><strong>then</strong> result := 2</p><p class="text-left"><strong>else if</strong></p><p class="text-left">…</p><p class="text-left"><strong>else if</strong> input == hash&lt;cnt&gt;</p><p class="text-left"><strong>else</strong> result := 0</p></td></tr></tbody></table><p> </p><table class="table tabletype-framed table-scaled" aria-label="" data-legend-id="ID0EE6YPB"><colgroup><col style="width: 2.77cm;"></col><col style="width: 3.02cm;"></col><col style="width: 1.75cm;"></col><col style="width: 3.97cm;"></col><col style="width: 5.40cm;"></col></colgroup><tbody><tr><td colspan="5"><p class="text-center"><strong>Function Mapping</strong></p></td></tr><tr><td><p class="text-left"><strong>Function</strong></p></td><td><p class="text-left"><strong>Inverse function</strong></p></td><td><p class="text-left"><strong>Number of Para.</strong></p></td><td><p class="text-left"><strong>Parameter</strong></p></td><td><p class="text-left"><strong>Description</strong></p></td></tr><tr><td><p class="text-left">SXConst</p></td><td><p class="text-left">-</p></td><td><p class="text-left">1</p></td><td><p class="text-left">value</p></td><td><p class="text-left">result := value</p></td></tr><tr><td><p class="text-left">SXEqual</p></td><td><p class="text-left">-</p></td><td><p class="text-left">1</p></td><td><p class="text-left">value</p></td><td><p class="text-left">if input == value<br />then result := 1<br />else result := 0</p></td></tr><tr><td><p class="text-left">SXSelectBool</p></td><td><p class="text-left">-</p></td><td><p class="text-left">2</p></td><td><p class="text-left">value1, value2</p></td><td><p class="text-left">if input == 0<br />then result := value2<br />else result := value1</p></td></tr><tr><td><p class="text-left">SXSelectVal1</p></td><td><p class="text-left">-</p></td><td><p class="text-left">3</p></td><td><p class="text-left">match, value1,<br />value2</p></td><td><p class="text-left">if input != match<br />then result := value2<br />else result := value1</p></td></tr><tr><td><p class="text-left">SXAvg</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-2</p></td><td><p class="text-left">cnt, value1,<br />value2, …<br />value15;<br />cnt != 0</p></td><td><p class="text-left">result := (input + value1 + value2 + …<br />+ value15) / cnt</p></td></tr><tr><td><p class="text-left">SXBetween</p></td><td><p class="text-left">-</p></td><td><p class="text-left">2</p></td><td><p class="text-left">min, max<br />min &gt; 0 und<br />max &gt;= min</p></td><td><p class="text-left">if min &lt;= input and input &lt;= max<br />then result := 1<br />else result := 0</p></td></tr><tr><td><p class="text-left">SXIntFromBits</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-2</p></td><td><p class="text-left">cnt, value1,<br />value2, …<br />1 &lt;= cnt &lt;= 32</p></td><td><p class="text-left">result := 0<br />for bit = 1 to cnt<br />if value&lt;bit&gt;<br />then result := result + 2**(bit-1)<br />value1 .. value&lt;cnt&gt; are specifying<br />result as a bitmask</p></td></tr><tr><td><p class="text-left">SXBitSet</p></td><td><p class="text-left">-</p></td><td><p class="text-left">2</p></td><td><p class="text-left">pos, value</p></td><td><p class="text-left">If input &lt;&gt; 0<br />then result:= value |= (1 &lt;&lt; (pos-1))<br />else result:=value &amp;= ~(1&lt;&lt;(pos-1))</p></td></tr></tbody></table><div class="linklist"></div></div><div class="textmodule" id="14238609931"><h2>Function Query Examples</h2><table class="table tabletype-framed table-scaled" aria-label="" data-legend-id="ID0EVUZPB"><colgroup><col style="width: 2.45cm;"></col><col style="width: 1.55cm;"></col><col style="width: 1.47cm;"></col><col style="width: 1.59cm;"></col><col style="width: 1.75cm;"></col><col style="width: 2.22cm;"></col><col style="width: 2.06cm;"></col><col style="width: 2.91cm;"></col></colgroup><tbody><tr><td colspan="8"><p class="text-center"><strong>Mapping direction BACnet→OPC</strong></p></td></tr><tr><td><p class="text-left"><strong>Function</strong></p></td><td><p class="text-left"><strong>Par1</strong></p></td><td><p class="text-left"><strong>Par2</strong></p></td><td><p class="text-left"><strong>Par3</strong></p></td><td><p class="text-left"><strong>Par4</strong></p></td><td><p class="text-left"><strong>Value-OPC</strong></p></td><td><p class="text-left"><strong>BACnet</strong></p></td><td><p class="text-left"><strong>Value OPC to feedback</strong></p></td></tr><tr><td><p class="text-left">SXAdd</p></td><td><p class="text-left">2.88</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">6</p></td><td><p class="text-left">8.88</p></td><td><p class="text-left">6</p></td></tr><tr><td><p class="text-left">SXSubtract</p></td><td><p class="text-left">10</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">40</p></td><td><p class="text-left">30</p></td><td><p class="text-left">40</p></td></tr><tr><td><p class="text-left">SXWriteBit</p></td><td><p class="text-left">2</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">7</p></td><td><p class="text-left">4</p></td><td><p class="text-left">1</p></td></tr><tr><td><p class="text-left">SXWriteBit</p></td><td><p class="text-left">2</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">6</p></td><td><p class="text-left">0</p></td><td><p class="text-left">0</p></td></tr><tr><td><p class="text-left">SXDirect</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td></tr><tr><td><p class="text-left">SXIntToMulti</p></td><td><p class="text-left">3</p></td><td><p class="text-left">12</p></td><td><p class="text-left">24</p></td><td><p class="text-left">36</p></td><td><p class="text-left">12</p></td><td><p class="text-left">1</p></td><td><p class="text-left">12</p></td></tr><tr><td><p class="text-left">SXIntToMulti</p></td><td><p class="text-left">3</p></td><td><p class="text-left">12</p></td><td><p class="text-left">24</p></td><td><p class="text-left">36</p></td><td><p class="text-left">14</p></td><td><p class="text-left">3</p></td><td><p class="text-left">36</p></td></tr><tr><td><p class="text-left">SXMultiToInt</p></td><td><p class="text-left">10</p></td><td><p class="text-left">20</p></td><td><p class="text-left">30</p></td><td><p class="text-left">40</p></td><td><p class="text-left">3</p></td><td><p class="text-left">40</p></td><td><p class="text-left">3</p></td></tr><tr><td><p class="text-left">SXMultiToInt</p></td><td><p class="text-left">10</p></td><td><p class="text-left">20</p></td><td><p class="text-left">30</p></td><td><p class="text-left">40</p></td><td><p class="text-left">1</p></td><td><p class="text-left">20</p></td><td><p class="text-left">1</p></td></tr><tr><td><p class="text-left">SXScaleBAC</p></td><td><p class="text-left">2</p></td><td><p class="text-left">4</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">10</p></td><td><p class="text-left">3</p></td><td><p class="text-left">10</p></td></tr><tr><td><p class="text-left">SXScaleOPC</p></td><td><p class="text-left">4</p></td><td><p class="text-left">2</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">100</p></td><td><p class="text-left">196</p></td><td><p class="text-left">100</p></td></tr><tr><td><p class="text-left">SXMul</p></td><td><p class="text-left">5</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">7</p></td><td><p class="text-left">35</p></td><td><p class="text-left">7</p></td></tr><tr><td><p class="text-left">SXDiv</p></td><td><p class="text-left">6</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">18</p></td><td><p class="text-left">3</p></td><td><p class="text-left">18</p></td></tr><tr><td><p class="text-left">MultiState2BstrHash</p></td><td><p class="text-left">3</p></td><td><p class="text-left">24</p></td><td><p class="text-left">36</p></td><td><p class="text-left">48</p></td><td><p class="text-left">2</p></td><td><p class="text-left">36</p></td><td><p class="text-left">2</p></td></tr><tr><td><p class="text-left">BstrHash2MultiState</p></td><td><p class="text-left">3</p></td><td><p class="text-left">20</p></td><td><p class="text-left">30</p></td><td><p class="text-left">40</p></td><td><p class="text-left">2</p></td><td><p class="text-left">30</p></td><td><p class="text-left">2</p></td></tr><tr><td><p class="text-left">SXEqual</p></td><td><p class="text-left">7</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">7</p></td><td><p class="text-left">1</p></td><td><p class="text-left">7</p></td></tr><tr><td><p class="text-left">SXConst</p></td><td><p class="text-left">112</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">555</p></td><td><p class="text-left">112</p></td><td><p class="text-left">112</p></td></tr><tr><td><p class="text-left">SXSelectBool</p></td><td><p class="text-left">5</p></td><td><p class="text-left">9</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">0</p></td><td><p class="text-left">9</p></td><td><p class="text-left">9</p></td></tr><tr><td><p class="text-left">SXSelectBool</p></td><td><p class="text-left">5</p></td><td><p class="text-left">9</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">1</p></td><td><p class="text-left">5</p></td><td><p class="text-left">1</p></td></tr><tr><td><p class="text-left">SXSelectVal1</p></td><td><p class="text-left">44</p></td><td><p class="text-left">1</p></td><td><p class="text-left">2</p></td><td><p class="text-left"> </p></td><td><p class="text-left">44</p></td><td><p class="text-left">1</p></td><td><p class="text-left">44</p></td></tr><tr><td><p class="text-left">SXSelectVal1</p></td><td><p class="text-left">44</p></td><td><p class="text-left">1</p></td><td><p class="text-left">2</p></td><td><p class="text-left"> </p></td><td><p class="text-left">1300</p></td><td><p class="text-left">2</p></td><td><p class="text-left">1300</p></td></tr><tr><td><p class="text-left">SXAvg</p></td><td><p class="text-left">3</p></td><td><p class="text-left">32</p></td><td><p class="text-left">64</p></td><td><p class="text-left">128</p></td><td><p class="text-left">256</p></td><td><p class="text-left">160</p></td><td><p class="text-left">256</p></td></tr><tr><td><p class="text-left">SXBetween</p></td><td><p class="text-left">7</p></td><td><p class="text-left">21</p></td><td><p class="text-left"> </p></td><td><p class="text-left"> </p></td><td><p class="text-left">8</p></td><td><p class="text-left">1</p></td><td><p class="text-left">8</p></td></tr><tr><td><p class="text-left">SXIntFromBits</p></td><td><p class="text-left">3</p></td><td><p class="text-left">1</p></td><td><p class="text-left">2</p></td><td><p class="text-left">4</p></td><td><p class="text-left">0</p></td><td><p class="text-left">7</p></td><td><p class="text-left">0</p></td></tr></tbody></table><p> </p><table class="table tabletype-framed table-scaled" aria-label="" data-legend-id="ID0EVUZPB"><colgroup><col style="width: 2.61cm;"></col><col style="width: 1.59cm;"></col><col style="width: 1.43cm;"></col><col style="width: 1.59cm;"></col><col style="width: 1.59cm;"></col><col style="width: 2.22cm;"></col><col style="width: 2.06cm;"></col><col style="width: 2.91cm;"></col></colgroup><tbody><tr><td colspan="8"><p class="text-center"><strong>Mapping direction BACnet→OPC</strong></p></td></tr><tr><td><p class="text-left"><strong>Function</strong></p></td><td><p class="text-left"><strong>Par1</strong></p></td><td><p class="text-left"><strong>Par2</strong></p></td><td><p class="text-left"><strong>Par3</strong></p></td><td><p class="text-left"><strong>Par4</strong></p></td><td><p class="text-left"><strong>Value-OPC</strong></p></td><td><p class="text-left"><strong>BACnet</strong></p></td><td><p class="text-left"><strong>Value OPC to feedback</strong></p></td></tr><tr><td><p class="text-left">SXAddLImiter</p></td><td><p class="text-left">2.88</p></td><td><p class="text-left">3</p></td><td><p class="text-left">45</p></td><td><p class="text-left">-</p></td><td><p class="text-left">100</p></td><td><p class="text-left">42.12</p></td><td><p class="text-left">45</p></td></tr><tr><td><p class="text-left">SXBitPos</p></td><td><p class="text-left">1</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">2</p></td><td><p class="text-left">4</p></td><td><p class="text-left">0</p></td></tr><tr><td><p class="text-left">SXBitPos</p></td><td><p class="text-left">1</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">7</p></td><td><p class="text-left">1</p></td><td><p class="text-left">14</p></td></tr><tr><td><p class="text-left">SXWriteBit</p></td><td><p class="text-left">2</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">1</p></td><td><p class="text-left">0</p></td><td><p class="text-left">0</p></td></tr><tr><td><p class="text-left">SXBoolToMulti</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-1000</p></td><td><p class="text-left">1</p></td><td><p class="text-left">0</p></td></tr><tr><td><p class="text-left">SXMultiToBool</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">55</p></td><td><p class="text-left">1</p></td><td><p class="text-left">0</p></td></tr><tr><td><p class="text-left">SXMultiToBool</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-</p></td><td><p class="text-left">-55</p></td><td><p class="text-left">2</p></td><td><p class="text-left">-1</p></td></tr></tbody></table><p> </p><section class="safety safety-type-info safety-severity-info" aria-label="    Information"><div class="safety-body row"><div class="safety-symbol" aria-label="aria.safetySymbol"><img src="../safety/info_Info.gif" alt="info" /></div><div class="safety-content" aria-label="description"><p class="safety-consequence" aria-label="Consequences"><strong>NOTE:</strong><br />Note that the value BACnet refers to the PresentValue. The RawPresentValue remains unaffected by the feedback effect.</p></div></div></section><div class="linklist"></div></div><div class="image"></div><div class="image"></div><div class="image"></div><div class="image"></div></article><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>
