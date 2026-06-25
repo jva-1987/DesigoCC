@@ -1,5 +1,5 @@
 ﻿body {
-	/* font: Modified: font size to 12px (previously 18px); */
+	/*? font: Modified: font size to 12px (previously 18px); */
 	font-size: 18px;
 	position: relative;
 }
@@ -114,6 +114,7 @@ footer {
 	padding: 14px 15px;
 }
 
+/*? update in navbar-logo */
 .schema-navbar-logo {
 	height: 15px;
 	width: 100px;
@@ -325,7 +326,6 @@ a.schema-toc-link {
 	text-decoration: none;
 	width: 100%;
 }
-
 
 a.schema-toc-link.active {
 	background-color: #b5d3e7;
@@ -651,59 +651,118 @@ code {
 }
 
 .emphasis-simpl {
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-red {
 	color: Red;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-green {
 	color: Green;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-blue {
 	color: Blue;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-inactive {
 	color: #83888E;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-black {
 	color: #000000;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-active {
 	color: #008080;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-success {
 	color: #28BF66;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-danger {
 	color: #A50922;
-	font-family: simpl-element-icons;
+	font-family: simpl-element-icons_legacy;
 	font-size: 1.2em;
 }
 
 .emphasis-simpl-warning {
+	color: #C75300;
+	font-family: simpl-element-icons_legacy;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux {
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-red {
+	color: Red;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-green {
+	color: Green;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-blue {
+	color: Blue;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-inactive {
+	color: #83888E;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-black {
+	color: #000000;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-active {
+	color: #008080;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-success {
+	color: #28BF66;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-danger {
+	color: #A50922;
+	font-family: simpl-element-icons;
+	font-size: 1.2em;
+}
+
+.emphasis-simplux-warning {
 	color: #C75300;
 	font-family: simpl-element-icons;
 	font-size: 1.2em;
@@ -732,6 +791,36 @@ code {
 .schema-inline-img {
 	max-height: 1.3rem;
 	vertical-align: text-bottom;
+}
+
+.ui-bold {
+	font-weight: bold;
+}
+
+th span.ui-bold {
+	font-weight: normal;
+}
+
+p.safety-cause span.ui-bold {
+	font-weight: normal;
+}
+
+h2 span.ui-bold {
+	font-weight: normal;
+}
+
+.ui-code {
+	font-family: monospace, monospace;
+	line-height: 1em;
+	padding: 0;
+}
+
+.ui-italic {
+	font-style: italic;
+}
+
+figcaption span.ui-italic {
+	font-style: normal;
 }
 
 .linklist-container {
@@ -777,6 +866,7 @@ ol.list>li {
 	margin-top: 0.6em;
 }
 
+/* added padding for list-items */
 ul.list {
 	margin: 0;
 	padding-left: 15px;
@@ -860,17 +950,17 @@ figure.img_fixed_column svg {
 
 figure>figcaption,
 .image-title {
+	font-size: 12px;
 	font-style: italic;
 }
 
 .breadcrumb {
-	background-color: #b5d3e7;
+	background-color: #D7D7CD;
 	flex-grow: 1;
 	margin-right: 5px;
-	z-index: 2;
-
 }
 
+/* ? updated font-size for breadcrumb items */
 .breadcrumb-item a {
 	color: rgb(0, 153, 153);
 	text-decoration: none;
@@ -923,7 +1013,7 @@ ul.schema-instruction>li {
 	margin-left: -5px;
 }
 
-ul.schema-instruction>li:before {
+ul.schema-instruction>li:first-of-type:before {
 	content: "\25C8";
 	display: inline-block;
 	font-family: "schema-glyphs";
@@ -975,7 +1065,6 @@ table {
 .table {
 	margin-top: 0.5em;
 	width: auto;
-
 }
 
 .table-fixed {
@@ -983,38 +1072,19 @@ table {
 	width: 100%;
 }
 
+/*? updated table padding here */
 td {
 	border: 1px solid #888888 !important;
 	;
 	padding: 10px !important;
-
-
 }
 
-/* updated table width and font-size */
+/*? updated table width and font-size */
 td p {
 	font-size: 16px;
-     /*	margin-right: -200px;
+	/*	margin-right: -200px;
 	width: 260px; */
 }
-
-/* updated table hyperlink style */
-/* td p a {} */
-
-/* updated img properties in table  */
-/* td p img {
-} */
-
-
-/* added index-page image properties */
-/* display: flex;
-width: 200vw;
-height: 110vh;
-max-width: 102%;
-margin-top: -80px;
-margin-left: -20px;
-margin-right: -20px;
-z-index: 0; */
 
 /*? -- with Cropped image -- */
 .indexpage_image_container img {
@@ -1027,17 +1097,6 @@ z-index: 0; */
 	border: 20px solid #000028;
 	z-index: -1;
 }
-
-/*? -- with :horizontal image --  */
-/* .indexpage_image_container img {
-	display: block;
-	height: 400px;
-	width: 100;
-	margin-left: auto;
-	margin-top: 20px;
-	margin-right: 80px;
-	border: 20px solid #000028;
-} */
 
 
 /** Box-container rep: index_content page */
@@ -1071,7 +1130,6 @@ z-index: 0; */
 	border-radius: 5px;
 }
 
-
 .tabletype-noframe td {
 	border: none !important;
 }
@@ -1079,9 +1137,7 @@ z-index: 0; */
 th {
 	background-color: #BBBBBB;
 	border: 1px solid #888888 !important;
-
 	padding: 5px !important;
-
 }
 
 .tabletype-noframe th {
@@ -1108,6 +1164,7 @@ th>*:first-child>li:first-child>p:first-child {
 }
 
 caption {
+	font-size: 12px;
 	caption-side: top
 }
 
@@ -1381,6 +1438,7 @@ a {
 	text-decoration: underline;
 }
 
+/*? updated hover color for hyperlinks */
 a:hover {
 	color: black;
 	font-weight: bold;
@@ -1436,7 +1494,7 @@ a:focus {
 	white-space: nowrap;
 }
 
-/* @media [Tablet (sm)] {
+@media [Tablet (sm)] {
 	.lexicon-entry-description {
 		margin-top: 0.5em;
 		max-width: 100%;
@@ -1445,10 +1503,10 @@ a:focus {
 
 @media [Phone (xs)] {
 	.lexicon-entry-description {
-		margin-top=0.5em;
-		max-width=100%;
+		margin-top: 0.5em;
+		max-width: 100%;
 	}
-} */
+}
 
 .schema-index-pagination {
 	margin-bottom: 0;

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript"><meta http-equiv="Content-Style-Type" content="text/css"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1"><meta name="id" content="17359201675"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="msapplication-config" content="none"><meta name="description" content="PPCL Editor"><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico"><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css"><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css"><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css"><link rel="stylesheet" href="../assets/css/schema-glyphs.css"><link rel="stylesheet" href="../assets/css/formats.css"><link rel="stylesheet" href="../assets/css/custom.css"><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css"><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css"><meta name="prev" content="17359173003"><meta name="next" content="17359180427"><script>var fileExtension = "html";</script><title>PPCL Editor</title></head><body class="schema-index content-container container" id="17359201675" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="17359201675" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="30206247051">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="30239996555">Subsystem Integration</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="17355931019">APOGEE P2 Applications</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="17359173003">APOGEE Cross Trunk</a></li><li class="breadcrumb-item active">PPCL Editor</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-17359201675"><h1 id="heading-17359201675">PPCL Editor</h1><p>Cross Trunk works for most cases in PPCL where a point is referenced. The following table lists supported PPCL commands for Cross Trunk.<strong></strong></p><table class="table tabletype-framed table-fixed" aria-label="" data-legend-id="ID0EABIO"><colgroup><col style="width: 100.0%;"></colgroup><tbody><tr><td><p class="text-center"><strong>Supported PPCL Commands</strong></p></td></tr><tr><td><p class="text-start">EMON / EMOFF / EMFAST / EMSLOW / EMAUTO / EMSET</p></td></tr><tr><td><p class="text-start">ON / OFF / STATE / AUTO / FAST / SLOW / SET</p></td></tr><tr><td><p class="text-start">DAY / NIGHT</p></td></tr><tr><td><p class="text-start">MAX / MIN</p></td></tr><tr><td><p class="text-start">SET / RELEAS / =</p></td></tr></tbody></table><p> </p><section class="safety safety-type-info safety-severity-info" aria-label="    Information"><div class="safety-body row"><div class="safety-symbol" aria-label="aria.safetySymbol"><img src="../safety/info_Info.gif" alt="info"></div><div class="safety-content" aria-label="description"><p class="safety-consequence" aria-label="Consequences"><strong>NOTE:</strong><br>Although PPCL may allow a Cross Trunk reference in other PPCL commands, it is strongly recommended not to do this.</p></div></div></section><div class="textmodule" id="17359214091">
+
+<h2>Commanding</h2>
+
+<p>Cross Trunk can be used to command a point on another BLN by referencing that point using one of the command statements listed in the <a class="schema-iframe-link" data-node-id="17359201675" id="schema-linklist-link17359201675" href="17359201675.html">Supported PPCL Commands</a> table. However, use caution when doing this—Cross Trunk only issues commands once per second. If multiple commands are received per second for a point, only the last command received is sent. </p>
+<p>Cross Trunk also restricts the points that can be commanded to P2 and BACnet Building Automation points. Below is a list of APOGEE P2 and BACnet point object models that Cross Trunk will command.</p>
+<p>Commanding points in Fire and Security systems is not allowed, because they are integrated into <span class="variable">Desigo CC</span> using different object models. </p>
+<p> </p><section class="safety safety-type-info safety-severity-info" aria-label="    Information"><div class="safety-body row"><div class="safety-symbol" aria-label="aria.safetySymbol"><img src="../safety/info_Info.gif" alt="info"></div><div class="safety-content" aria-label="description"><p class="safety-consequence" aria-label="Consequences"><strong>NOTE:</strong><br>Using Cross Trunk in conjunction with integrating Fire and Security systems using generic third-party BACnet is not recommended.</p></div></div></section>
+<p> </p>
+<h2>APOGEE P2 Object Models Supporting Cross Trunk Commanding</h2>
+
+<p><strong>Float:</strong></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LAI_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LAI_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LAO_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LAO_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LPACI_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LPACI_V”</code></p>
+<p><strong>Unsigned:</strong></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_L2SL_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_L2SL_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_L2SP_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_L2SP_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LDI_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LDI_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LDO_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LDO_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LENUM_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LENUM_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LFSSL_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LFSSL_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LFSSP_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LFSSP_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LOOAL_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LOOAL_V”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LOOAP_1”</code></p>
+<p><code>“GMS_APOGEE_P2_EO_BA_LOOAP_V“</code></p>
+<h2>BACnet Object Models Supporting Cross Trunk Commanding</h2>
+
+<p><code>“GMS_BACNET_EO_BA_AO_1”</code></p>
+<p><code>“GMS_BACNET_EO_BA_AV_1”</code></p>
+<p><code>“GMS_BACNET_EO_BA_BO_1”</code></p>
+<p><code>“GMS_BACNET_EO_BA_BV_1”</code></p>
+<p><code>“GMS_BACNET_EO_BA_MSO_1”</code></p>
+<p><code>“GMS_BACNET_EO_BA_MSV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_AO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_AV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_AO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_AV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_AO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_AV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_BO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_BV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_BO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_BV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_MSO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_DEV_MSV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_BO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_BV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_MSO_1” </code></p>
+<p><code>“GMS_APOGEE_EO_BA_FLN_UEC_DEV_MSV_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_MSO_1”</code></p>
+<p><code>“GMS_APOGEE_EO_BA_MSV_1”    </code></p>
+<p><code></code></p><div class="linklist"><a class="schema-iframe-link" data-node-id="17359201675" id="schema-linklist-link17359201675" href="17359201675.html"></a></div></div><div class="textmodule" id="17359219595"><h2>Mapping APOGEE P2 to BACnet Command Priorities</h2><p>BACnet and APOGEE P2 use two different command priority schemes. When commanding a BACnet point from an APOGEE P2 PPCL program, APOGEE P2 command priorities are mapped to BACnet command priorities as follows:</p><table class="table tabletype-framed table-fixed" aria-label="" data-legend-id="ID0EMLIO"><colgroup><col style="width: 49.2%;"><col style="width: 50.7%;"></colgroup><tbody><tr><td colspan="2"><p class="text-center"><strong>Mapping Priorities Between APOGEE P2 and BACnet</strong></p></td></tr><tr><td><p class="text-start"><strong>APOGEE Priority</strong></p></td><td><p class="text-start"><strong>BACnet Priority</strong></p></td></tr><tr><td><p class="text-start">OPER</p></td><td><p class="text-start">BACnet Operator 8</p></td></tr><tr><td><p class="text-start">SMOKE</p></td><td><p class="text-start">BACnet priority 10</p></td></tr><tr><td><p class="text-start">EMER</p></td><td><p class="text-start">BACnet priority 12</p></td></tr><tr><td><p class="text-start">PDL</p></td><td><p class="text-start">BACnet priority 14</p></td></tr><tr><td><p class="text-start">NONE</p></td><td><p class="text-start">BACnet priority 16</p></td></tr></tbody></table><p> </p><h2>Creating an APOGEE to BACnet Priorities File</h2><p>BACnet priorities mapping can be modified on a per-project basis by creating a text file named “<strong>ApogeeToBacnetPriorities.txt</strong>” in the <strong>/Config</strong> folder of your project folder. For example,</p><p><code>[Installation Drive]:\[Installation Folder\</code>[Project Name]<code>\config</code>.</p><p>The following information must be included in the text file; otherwise the default mapping will <em>not</em> be overridden:</p><ul class="list"><li value="1">Each line must specify an APOGEE to BACnet priority mapping and appear like the following:</li><ul class="list"><li value="1">OPER,8</li><li value="2">SMOKE,10</li><li value="3">EMER,12</li><li value="4">PDL,14</li><li value="5">NONE,16</li></ul><li value="2">All five APOGEE priorities must be mapped</li><li value="3">The priorities mapped must follow a numeric ordering where: <br>1 &lt;= OPER &lt;= SMOKE &lt;= EMER &lt;=PDL &lt;=NONE &lt;= 16</li></ul><p><strong>NOTE:</strong> You must stop and restart the project in the System Management Console for the text file changes to take effect. </p><p> </p><div class="linklist"></div></div><div class="textmodule" id="17359225099">
+
+<h2>Point Referencing</h2>
+
+<p>Specifying points depends on whether the points are P2 or BACnet points:</p>
+<ul class="list"><li value="1"><strong>APOGEE P2 Points</strong> - Reside in a device on an APOGEE Ethernet or APOGEE AEM network or are points that reside on FLNs serviced by an APOGEE Ethernet or P2 panel. </li><li value="2"><strong>BACnet Points</strong> – Reside on APOGEE BACnet panels or are in FLN devices serviced by APOGEE BACnet panels.</li></ul>
+
+<h2>APOGEE P2 Point Referencing</h2>
+
+<p>For P2 point referencing, note that: </p>
+<ul class="list"><li value="1">You can specify the <strong>System Name</strong>, or <strong>System Name</strong> <em>and </em><strong>Subpoint</strong>, in the form <br><strong>SystemName:SubpointName</strong>. For example “<code>Device10APP2025:Day CLG STPT</code>”</li><li value="2">You can drag-and-drop a P2 point from System Browser into the PPCL Editor on a P2 panel.</li><li value="3">Each FLN device is represented by an APOGEE P2 FLN device, where the subpoints of the FLN device are represented as properties of the device. Generally, the commandable subpoints of these devices are commanded via Cross Trunk. </li></ul>
+
+<h2>BACnet Point Referencing</h2>
+
+<p>The following Object Types are supported for BACnet point referencing:</p>
+<p>- Analog Input (AI)</p>
+<p>- Analog Output (AO)</p>
+<p>- Analog Value (AV)</p>
+<p>- Binary Input (BI)</p>
+<p>- Output (BO)</p>
+<p>- Binary Value (BV)</p>
+<p>- State Input (MI)</p>
+<p>- Multi-State Output (MO)</p>
+<p>- Multi-State Value (MV)</p>
+<h2>Referencing BACnet points</h2>
+
+<p>To reference a BACnet point consider the following:</p>
+<ul class="list"><li value="1">You can drag and drop a BACnet point into a PPCL program in a BACnet panel.</li><li value="2">You can drag and drop a BACnet point into a PPCL program in a P2 panel. Note the following BACnet point references in a P2 panel:<br>Non-FLN Point – The system name is dropped from the point name.<br>FLN Point – The point naming takes on the BACnet naming conventions. </li><li value="3">Use BACnet third-party form. Specify <strong>BAC_</strong>[<em>device instance</em>]<strong>_</strong>[<em>object type</em>]<strong>_</strong>[<em>object instance</em>]. For example, <strong>BAC_10_MO_1</strong> <em>where:</em><br>10 = Device Instance of 10<br>MO = Multi-State Output<br>1 = Object Instance of 1</li><li value="4">Or, use the <strong>Management View </strong>CNS node name for a point.</li><ul class="list"><li value="1">For a non-FLN device point, use the <strong>Management View</strong> <em>name</em> (not d<em>escription</em>) for a point, for Instance “<code>FLOOR_1_DO1</code>”. If this is not unique in the system, then precede the name with enough of the <strong>Management View</strong> path to make it unique, and place a colon (:) between the path and name. For instance “<code>Device10.Local_IO:FLOOR_1_DO1</code>”</li><li value="2">For FLN Subpoints, precede the Subpoint name with the FLN device name and a colon (:) This is because FLN device Subpoint names are the same for each instance of the FLN device, for example: “<code>Dev201:DAY_CLG_STPT</code>”</li></ul></ul>
+
+<h2>Cross Trunk References in Migrated PPCL</h2>
+
+<ul class="list"><li value="1">In APOGEE, the Cross Trunk solution allows the using third-party BACnet form for referencing BACnet points from PPCL. This support is the same in <span class="variable">Desigo CC</span> , and these references work as long as the <span class="variable">Desigo CC</span> system does not have more than one BACnet inter-network. In the case of multiple BACnet inter-networks, the reference may be ambiguous, in which case it is necessary to switch the reference to use the CNS name.</li><li value="2">In APOGEE, BACnet points can be referenced by Cross Trunk using the System name. In <span class="variable">Desigo CC</span> , migrated APOGEE BACnet points do not have a System Name; therefore, Cross Trunk must locate these points by their CNS name. In order to minimize any changes needed in migrated PPCL, the <span class="variable">Desigo CC</span> Cross Trunk attempts to convert the System Name it receives from PPCL to a CNS name, using a similar algorithm used when migrating a BACnet Point from APOGEE to <span class="variable">Desigo CC</span> . In most cases, this allows the reference to resolve without any changes to PPCL. If the reference comes up <em>ambiguous</em>, or the point cannot be found, then the PPCL must be modified to specify the CNS name. </li></ul>
+
+<h2>Searching Guideline</h2>
+
+<ul class="list"><li value="1">When searching by the CNS name, if the reference contains special characters other than a single colon (:), Cross Trunk replaces them with underscores. This is close to the same algorithm that Discovery and Import use when migrating an APOGEE name to a CNS node name.</li></ul>
+
+<p><strong>NOTE:</strong> Depending on how the system is configured, the search result may be ambiguous. In that case, you must specify additional details or change the configuration of the points for which you are searching.</p><div class="linklist"></div></div></article><footer><p class="text-muted"></p><p class="text-muted" aria-label="copyright">© 2014 - 2025 Siemens Schweiz AG</p></footer><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>

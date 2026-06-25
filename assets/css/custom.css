@@ -1,4 +1,5 @@
-﻿p,
+﻿/*? updated font-size for internal-container items */
+p,
 ul,
 ol {
     font-size: 14px;
@@ -13,7 +14,6 @@ ol {
     margin-top: -0.75em;
     color: black;
 }
-
 
 .text-muted {
     color: #D7D7CD;
@@ -109,9 +109,8 @@ ul.menpoint>li {
     float: left;
     height: 50px;
 }
-
+/*? updated href link behavior */
 ul.menpoint>li>a {
-    /* color: #41AAAA; */
     color: black;
     font-weight: 500;
     display: block;
@@ -122,7 +121,7 @@ ul.menpoint>li>a {
     text-decoration: none;
     transition: color linear 0.2s;
 }
-
+/*? updated hover behaviour for href */
 ul.menpoint>li>a:hover {
     background-color: #00a09d;
     color: rgb(255, 255, 255);
@@ -176,7 +175,7 @@ div.safety-body {
 ul.index-letter-list {
     padding-left: 0px;
 }
-
+/* ? added font-size to breadcrumb items */
 .breadcrumb-item.active {
     color: rgb(0, 0, 0);
     font-size: 14px;
@@ -266,4 +265,8 @@ g>a {
 .container {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
 }

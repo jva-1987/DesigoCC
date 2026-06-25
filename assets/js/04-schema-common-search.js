@@ -1026,8 +1026,12 @@ Schema.Search.ResultWriter = function (init) {
 			.attr("class", "search-result-title")
 			.html(self.Highlight((item[loc.Title] && item[loc.Title].length > 0) ? item[loc.Title] : item[loc.Filename]));
 
-		return anchor;
+		//2025-04-24: CFTJSD-2695 added change of link target to enable external pdf files
+		if (item[loc.Filename].toLowerCase().endsWith(".pdf"))
+			anchor.prop("href", "./"+item[loc.Filename])
+				.attr("data-node-id", item[loc.Id]);
 
+		return anchor;
 	};
 
 	this.WritePagingAndCount = function (page) {
