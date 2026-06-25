@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms"><meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="generator" content="SCHEMA ST4, Bootstrap 2019 v1" /><meta name="id" content="16589217419" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="description" content="Properties Section" /><link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico" /><link layout-comment="OpenIconic-Font" rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/01-bootstrap.min.css" /><link rel="stylesheet" href="../assets/css/base_ltr/07-jquery.typeahead.min.css" /><link rel="stylesheet" href="../assets/css/schema-glyphs.css" /><link rel="stylesheet" href="../assets/css/formats.css" /><link rel="stylesheet" href="../assets/css/custom.css" /><link rel="stylesheet" href="../assets/css/custom/custom_fonts.css" /><link rel="stylesheet" href="../assets/css/custom/custom_typeahead.css" /><meta name="prev" content="16589345675" /><meta name="next" content="16589180299" /><script>var fileExtension = "html";</script><title>Properties Section</title></head><body class="schema-index content-container container" id="16589217419" lang="en-US" xmlns:forms="http://www.schema.de/2010/ST4/Layout/MarkupLanguage/Forms" data-node-id="16589217419" data-culture="en-US" dir="ltr"><header class="d-print-none"><nav class="d-flex" aria-label="Breadcrumb Naviagation"><ol class="breadcrumb "><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="index_content">Home</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="30206247051">Engineering Reference</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="30239996555">Subsystem Integration</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="13808741259">APOGEE BACnet Applications</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="16589077771">APOGEE Point Editor</a></li><li class="breadcrumb-item"><a class="schema-iframe-link schema-breadcrumb-link" href="#" data-node-id="16589174795">APOGEE Point Editor Workspace</a></li><li class="breadcrumb-item active">Properties Section</li></ol></nav></header><article class="highlightable" role="main" aria-labelledby="heading-16589217419"><h1 id="heading-16589217419">Properties Section</h1><p>The fields and buttons that appear in the <strong>Properties</strong> section depends on the type of logical APOGEE point you are defining or displaying. Some of the fields in the section may be unique for a point type, other fields are common among several point types.</p><p>The fields that can appear in the <strong>Point Editor Properties</strong> section are as follows:</p><div class="textmodule" id="16589283211">
+
+<h2>Actuator Type</h2>
+
+<p>Applies to LAO points. The actuator type is based on the type of output that the actuator receives. The actuator types are:</p>
+<ul class="list"><li value="1">Current (4–20 mA) </li><li value="2">Voltage (0–10 Vdc) </li><li value="3">L-Type sensor </li></ul>
+
+<p> </p></div><div class="textmodule" id="16589323147">
+
+<h2>Count Both Edges</h2>
+
+<p>Applies to LPACI points.</p>
+<ul class="list"><li value="1">If <strong>unchecked</strong>, each on/off pulse (momentary contact) of the point produces one pulse count.</li><li value="2">If <strong>checked</strong>, each on/off pulse of the point produces two pulse counts. </li></ul>
+
+<p> </p>
+</div><div class="textmodule" id="16589289227">
+
+<h2>COV Limit</h2>
+
+<p>Applies to LAI, LAO, and LPACI points. Change-of-value limit. The amount of change, in engineering units, a point can experience before a field panel reports the change to other field panels on the BLN.</p>
+<p> </p></div><div class="textmodule" id="16589309579">
+
+<h2>Delay</h2>
+
+<p>This property, an Unsigned type, specifies the minimum period of time, in seconds, that the Present_Value must remain outside the band as defined by the High_Limit and Low_Limit properties before a TO-OFFNORMAL event is generated or within the same band, including the Deadband property, before a TO-NORMAL event is generated. This property is required if intrinsic reporting is supported by this object. </p>
+<p> </p>
+</div><div class="textmodule" id="16589227915">
+
+<h2>Dynamic COV</h2>
+
+<p>Dynamic Change of Value. The field panel will automatically change the points (LAO or LAI) COV limit in an attempt to obtain approximately 1 COV per 100 seconds. The algorithm will increase the COV limit if the point is generating too many COV's and decrease the COV limit if the point is more stable. Using Dynamic COVs will optimize the number of COVs you receive from a point, ensuring you receive important data without generating excessive network traffic.</p>
+<p> </p></div><div class="textmodule" id="16589233931">
+
+<h2>Engineering Unit</h2>
+
+<p>Applies to LAI, LAO, and LPACI points. Common units of measurement that represent a point value such as pressure, temperature, voltage, and volume flow rate. For example, degrees Fahrenheit (DEG F), degrees Celsius (DEG C) and Kilowatt-hours (KWH). </p>
+<p>Select a unit of measure from the drop-down menu.</p>
+</div><div class="textmodule" id="16589329163">
+
+<h2>Gain</h2>
+
+<p>Applies to LPACI points. <em>Gain-per-pulse edge</em>. Factor used to convert pulses from a LPACI point into the engineering units that represent point values. Gain can be from 0.001 to 5000.0 engineering units represented by each pulse count.</p>
+<p><strong>NOTE:</strong> If you check the <strong>Count Both Edges</strong> check box, each on/off pulse produces two pulse produces two pulse counts and the Gain must be halved. </p>
+<p> </p></div><div class="textmodule" id="16589240331">
+
+<h2>Initial Priority</h2>
+
+<p>The priority that a point is initially set to.</p>
+<p> </p></div><div class="textmodule" id="16589246347">
+
+<h2>Initial Value</h2>
+
+<p>The value (such as a temperature setting) that a point is initially set to. The point remains at this setting until it is commanded to a new value.</p>
+<p> </p></div><div class="textmodule" id="16589252363">
+
+<h2>Intercept</h2>
+
+<p>Applies to LAI and LAO points. Slope and intercept are factors used to convert the signals the field panel uses for analog points into the engineering units that represent the point values. The formulas used to calculate slope and intercept are determined by the type of field panel or FLN device that contains the point and the type of physical input or output device represented by the point.</p>
+<p>You can use the Slope Intercept Calculator to automatically calculate a point’s slope and intercept.</p>
+<p> </p></div><div class="textmodule" id="16638264459">
+
+<h2>Instance Number</h2>
+
+<p>A unique number specified for BACnet objects in a BACnet field panel or device tht is used when you generate an event notification. The instance number combined with the object type gives you the BACnet object ID. Object IDs must be unique in a BACnet device. </p></div><div class="textmodule" id="16589315595">
+
+<h2>Normally Closed </h2>
+
+<p>Applies to physical DI points.</p>
+<ul class="list"><li value="1">If <strong>unchecked</strong>, the contacts for the point are wired to be open when no energy is applied to the point.</li><li value="2">If <strong>checked</strong>, the contacts for the point are wired to be closed when no energy is applied to the point. </li></ul>
+
+</div><div class="textmodule" id="17217076619">
+
+<h2>Relinquish Default</h2>
+
+<p>Displays the relinquish or release default value for the BACnet point. A BACnet point is set to the Relinquish Default setting when there are no commands for BACnet priorities 1 through 16. </p>
+<p><strong>NOTE:</strong> Due to firmware limitations the following data points do not have Relinquish Default capabilities if they are virtual and have an address:</p>
+<ul class="list"><li value="1">LDO </li><li value="2">LFSSL</li><li value="3">LFSSP</li><li value="4">L2SL</li><li value="5">L2SP</li></ul>
+</div><div class="textmodule" id="16589258379">
+
+<h2>Sensor Type</h2>
+
+<p>Applies to LAI points. Indicates the type of input the point receives. The sensor types are:</p>
+<ul class="list"><li value="1">Current (4 to 20 mA) </li><li value="2">Thermistor (thermo-electric element with electrical resistance that falls with the rise of temperature) </li><li value="3">Voltage (0 to 10 Vdc) </li><li value="4">Pneumatic (3 to 15 psig) </li><li value="5">Thermistor 10 KOhm </li><li value="6">Thermistor 100 KOhm </li><li value="7">Thermistor 10k Type 3 </li><li value="8">MEC RTD (Modular Equipment Controller Resistance Temperature Detector) </li><li value="9">RTD 1k Platinum 385 </li><li value="10">RTD 1k Nickel </li><li value="11">RTD 1k Nickel JCI </li><li value="12">RTD 1k Nickel DIN </li><li value="13">L-Type (AI sensor terminated on a FLN device) </li></ul>
+
+<p> </p></div><div class="textmodule" id="16589264395">
+
+<h2>Slope</h2>
+
+<p>Applies to LAI and LAO points. Slope and intercept are factors used to convert signals the field panel uses for analog points into the engineering units that represent point values. The formulas used to calculate slope and intercept are determined by the type of field panel or FLN device that contains the point and type of input or output device represented by the point.</p>
+<p>You can use the Slope Intercept Calculator to automatically calculate a point’s slope and intercept.</p>
+<p> </p></div><div class="textmodule" id="16589304331">
+
+<h2>State Text Group</h2>
+
+<p>Applies to digital points. Allows you to select the text group that represents each point state. For example, On and Off or Start and Stop. The text group assigned to a point state is displayed when you are viewing the point state in workstation applications. The text listed in the table is defined in the Text Group Editor.</p>
+<p> </p></div><div class="textmodule" id="16589295243"><h2>Slope Intercept Calculator</h2><p>An APOGEE Point Editor feature that automatically calculates the slope and intercept for LAI and LAO points.</p><p>The Fields that appear on the Slope Intercept Calculator depend on the point type, field panel, sensor, and device range selected. </p><table class="table tabletype-framed table-fixed" aria-label="" data-legend-id="ID0EBXIO"><colgroup><col style="width: 24.2%;"></col><col style="width: 75.7%;"></col></colgroup><tbody><tr><td colspan="2"><p class="text-center"><strong>User Accounts</strong></p></td></tr><tr><td><p class="text-start"><strong>Item</strong></p></td><td><p class="text-start"><strong>Description</strong></p></td></tr><tr><td><p class="text-start">Point Type</p></td><td><p class="text-start">The point type of the point for which you are calculating the slope and intercept.</p><p class="text-start"><strong>Applies to:</strong> LAI or LAO points.</p></td></tr><tr><td><p class="text-start">Calculate Based On</p></td><td><p class="text-start">The type of field panel or FLN device to which the point is connected. <strong>NOTE:</strong> For certain equipment controllers (such as fume hood controllers or fume hood monitors), you can select the TEC/TCU option in the Calculated Based on field.</p></td></tr><tr><td><p class="text-start">Sensor Type</p></td><td><p class="text-start">Applies to LAI points. Indicates the type of input the point receives.</p></td></tr><tr><td><p class="text-start">Calculate Using</p></td><td><p class="text-start">Indicates whether <strong>English</strong> units or Metric units (<strong>SI</strong> indicates System International units) are used for the slope and intercept calculations</p></td></tr><tr><td><p class="text-start">Signal Range (Low/High Value)</p></td><td><p class="text-start">The value range of the physical signal emitted between the input/output device and the field panel. For example, the signal range could register between 4-20 mA for a differential pressure sensor, or it could register between 8-13 psi for a pneumatic actuator. If you are using signal ranges that differ from those listed, change the values in the <strong>Signal Range</strong> field.</p></td></tr><tr><td><p class="text-start">Device Range (Low/High<strong></strong>Value<strong>)</strong></p></td><td><p class="text-start">The value range for actual movement emitted from the input/output device. For example, the device range could register between 0-.5“ for a differential pressure sensor, or it could register between 0-100% to represent the opened and closed state of a pneumatic damper actuator. </p><p class="text-start">If you are using device ranges that differ from those listed, change the values in the Device Range field. For example, the device may not have the standard 20-120 range, but instead may have a range of 10-150 with the same 4-20 mA signal. </p></td></tr><tr><td><p class="text-start">Standard Input<strong></strong>Ranges</p></td><td><p class="text-start">The sensor range for the point. Values for the Signal Range and Device Range fields are automatically filled-in based on the Standard Input Range you select. </p></td></tr><tr><td><p class="text-start">Duct Area</p></td><td><p class="text-start">Duct size in square feet or liters per second (for specific equipment controller applications.)</p></td></tr><tr><td><p class="text-start">Range (Low/High Value)</p></td><td><p class="text-start">Low and high value range for virtual points. </p></td></tr><tr><td><p class="text-start">Standard or Narrow</p></td><td><p class="text-start">The two analog input ranges for an MPU. Indicates whether the narrow range (34 DEG F to 117 DEG F) or the wide range (-40 DEG F to 260 DEG F) is used. </p></td></tr><tr><td><p class="text-start">Wire Size (AWG)</p></td><td><p class="text-start">The input size (14, 16, 18, 20, or 22) terminated between a resistance temperature sensor (RTD) and an MBC/RBC.</p><p class="text-start"><strong>Applies to:</strong> LAI points.</p></td></tr><tr><td><p class="text-start">Wire Length (ft or m)</p></td><td><p class="text-start">The input size (feet or meters) of the wire terminated between a resistance temperature sensor (RTD) and an MBC/RBC.</p><p class="text-start"><strong>Applies to:</strong> LAI points.</p></td></tr></tbody></table><div class="linklist"></div></div><div class="textmodule" id="16589270411">
+
+<h2>Totalization Rate</h2>
+
+<p>Applies to all points except LPACI and LENUM. Indicates whether a point value is totaled and, if so, whether the value is totaled in hours, minutes, or seconds. Totalization allows the system to track point information such as total run time for a fan or pump, or total volume from a flow rate sensor.</p>
+<p> </p>
+</div><div class="textmodule" id="16589277195">
+
+<h2>Wire Resistance</h2>
+
+<p>Applies to LAI points. An adjustment to a point’s intercept value to compensate for long runs of wire. This applies in cases where resistance of the sensor wire is significant enough to affect the point’s engineering value.</p>
+<p> </p></div></article><footer><p class="text-muted"></p><p class="text-muted" aria-label="copyright">© 2014 - 2025 Siemens Schweiz AG</p></footer><script src="../assets/js/00-jquery-3.6.3.min.js"></script><script src="../assets/js/01-popper.min.js"></script><script src="../assets/js/02-schema.js"></script><script src="../assets/js/03-snap.svg-min.js"></script><script src="../assets/js/04-schema-common-search.js"></script><script src="../assets/js/05-svg-highlight.js"></script><script src="../assets/js/22-highlight-function.js"></script><script src="../assets/js/23-jquery-typeahead.min.js"></script><script src="../assets/js/24-autocompletion.js"></script><script src="../assets/js/25-collapsible.js"></script><script src="../assets/js/32-highlight-results.js"></script><script src="../assets/js/50-show-highlight-results.js"></script><script src="../assets/js_ltr/06-bootstrap.min.js"></script><script src="../assets/js_iframe/00-schema-iframe.js"></script></body></html>
